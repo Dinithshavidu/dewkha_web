@@ -6,7 +6,7 @@ export const machinesDB = [
     code: "DC-BBL-3PR-004",
     name: "Bambu Lab A1 Combo 3D Printer",
     price: "$399",
-    whatsappNumber: "94718512786",
+    whatsappNumber: "94711609341",
     category: "3D Printers",
     // 1. Image Gallery
     images: [
@@ -34,10 +34,10 @@ export const machinesDB = [
       "To connect the A1 printer to the AMS/ AMS 2 Pro/ AMS HT, an AMS HUB (SA013) accessory is needed."
     ],
     // 4. Accessories
-    accessories: [
-      { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-      { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    ],
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/vhBLetZHJK0?si=8J9rUi9Ud6zkJUOG",
     unboxingVideoId: "https://www.youtube.com/embed/43UNZvhyqJk?si=JxFrrXnjTw_1TE2j",
@@ -159,7 +159,7 @@ export const machinesDB = [
     code: "DC-BBL-3PR-003",
     name: "Bambu Lab A1 3D Printer",
     price: "$299",
-    whatsappNumber: "94718512786",
+    whatsappNumber: "94711609341",
     category: "3D Printers",
     // 1. Image Gallery
     images: [
@@ -186,10 +186,10 @@ export const machinesDB = [
       "To connect the A1 printer to the AMS/ AMS 2 Pro/ AMS HT, an AMS HUB (SA013) accessory is needed."
     ],
     // 4. Accessories
-    accessories: [
-      { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-      { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    ],
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/vhBLetZHJK0?si=8J9rUi9Ud6zkJUOG",
     unboxingVideoId: "https://www.youtube.com/embed/43UNZvhyqJk?si=JxFrrXnjTw_1TE2j",
@@ -313,7 +313,7 @@ export const machinesDB = [
     code: "DC-BBL-3PR-001",
     name: "Bambu Lab A1 mini 3D Printer",
     price: "$399",
-    whatsappNumber: "94718512786",
+    whatsappNumber: "94711609341",
     category: "3D Printers",
     // 1. Image Gallery
     images: [
@@ -337,10 +337,10 @@ export const machinesDB = [
       "To connect the A1 mini printer to the AMS/ AMS 2 Pro/ AMS HT, an AMS HUB (SA013) accessory is needed."
     ],
     // 4. Accessories
-    accessories: [
-      { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-      { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    ],
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/QVTbHuwVnZc?si=-2nb-_ZNVqvHImMJ",
     unboxingVideoId: "https://www.youtube.com/embed/uhyYlKnhUbM?si=_Zs-sdmIKX6STaYE",
@@ -474,7 +474,7 @@ Timelapse Supported`
     code: "DC-BBL-3PR-002",
     name: "Bambu Lab A1 mini Combo 3D Printer",
     price: "$399",
-    whatsappNumber: "94718512786",
+    whatsappNumber: "94711609341",
     category: "3D Printers",
     // 1. Image Gallery
     images: [
@@ -500,10 +500,10 @@ Timelapse Supported`
       "To connect the A1 mini printer to the AMS/ AMS 2 Pro/ AMS HT, an AMS HUB (SA013) accessory is needed."
     ],
     // 4. Accessories
-    accessories: [
-      { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-      { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    ],
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/QVTbHuwVnZc?si=-2nb-_ZNVqvHImMJ",
     unboxingVideoId: "https://www.youtube.com/embed/uhyYlKnhUbM?si=_Zs-sdmIKX6STaYE",
@@ -633,10 +633,10 @@ Timelapse Supported`
 
   {
     id: "M-005",
-    code: "DC-BBL-3PR-005",
+    code: "DC-BBL-3PR-006",
     name: "Bambu Lab A2L Combo 3D Printer",
     price: "$399",
-    whatsappNumber: "94718512786",
+    whatsappNumber: "94711609341",
     category: "3D Printers",
     // 1. Image Gallery
     images: [
@@ -668,10 +668,10 @@ Timelapse Supported`
       "Indoor Safe: UL 2904 GREENGUARD certified for emission safety."
     ],
     // 4. Accessories
-    accessories: [
-      { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-      { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    ],
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/vhBLetZHJK0?si=6YdppipPCek_gyrd",
     unboxingVideoId: "https://www.youtube.com/embed/eWPBXls2WkI?si=BFASwIGrzvnUv-Pj",
@@ -896,7 +896,7 @@ Supports timelapse photography`
     code: "DC-BBL-3PR-005",
     name: "Bambu Lab A2L 3D Printer",
     price: "$399",
-    whatsappNumber: "94718512786",
+    whatsappNumber: "94711609341",
     category: "3D Printers",
     // 1. Image Gallery
     images: [
@@ -923,10 +923,10 @@ Supports timelapse photography`
       "Indoor Safe: UL 2904 GREENGUARD certified for emission safety."
     ],
     // 4. Accessories
-    accessories: [
-      { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-      { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    ],
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/vhBLetZHJK0?si=6YdppipPCek_gyrd",
     unboxingVideoId: "https://www.youtube.com/embed/43UNZvhyqJk?si=NrDT_oawyg3dZuE0",
@@ -1154,7 +1154,7 @@ Supports timelapse photography`
     code: "DC-BBL-3PR-007",
     name: "Bambu Lab P1S 3D Printer",
     price: "$399",
-    whatsappNumber: "94718512786",
+    whatsappNumber: "94711609341",
     category: "3D Printers",
     // 1. Image Gallery
     images: [
@@ -1179,10 +1179,10 @@ Supports timelapse photography`
       "Full-Scale Volume: A generous 256 × 256 × 256 mm³ build space for your large projects."
     ],
     // 4. Accessories
-    accessories: [
-      { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-      { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    ],
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
     // 5. YouTube Embed IDs
     
     unboxingVideoId: "https://www.youtube.com/embed/6cv-PQWit3g?si=AslF7CwEFvoXqVh1",
@@ -1411,7 +1411,7 @@ Timelapse Supported`
 ],
     // 8. What's in the Box
     inTheBox: [
-      { name: "Bambu Lab P1S", image: "/images/P1S-01.jpg" },
+      { name: "Bambu Lab P1S", image: "/images/P1S-box-01.jpg" },
       { name: "Stainless Steel Hotend with Nozzle", image: "/images/P1S-box-1.jpg" },
       { name: "Build Plate", image: "/images/P1S-box-2.jpg" },
       { name: "Bambu PLA Filament(with a spool) (*This will not be included in P1S AMS 2 Pro Combo)", image: "/images/P1S-box-3.jpg" },
@@ -1436,7 +1436,7 @@ Timelapse Supported`
     code: "DC-BBL-3PR-008",
     name: "Bambu Lab P1S Combo 3D Printer",
     price: "$399",
-    whatsappNumber: "94718512786",
+    whatsappNumber: "94711609341",
     category: "3D Printers",
     // 1. Image Gallery
     images: [
@@ -1461,10 +1461,10 @@ Timelapse Supported`
       "Full-Scale Volume: A generous 256 × 256 × 256 mm³ build space for your large projects."
     ],
     // 4. Accessories
-    accessories: [
-      { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-      { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    ],
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
     // 5. YouTube Embed IDs
    
     unboxingVideoId: "https://www.youtube.com/embed/1Thb5LgGxUM?si=8_dztpAirKUNNpMh",
