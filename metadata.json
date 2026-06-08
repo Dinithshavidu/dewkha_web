@@ -1,0 +1,8 @@
+{
+  "name": "DEWKHA",
+  "description": "3D printing and laser cutting services and machines.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
