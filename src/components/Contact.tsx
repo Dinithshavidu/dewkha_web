@@ -323,24 +323,23 @@ function LeftColumn() {
           <p className="text-xs font-bold tracking-widest text-[#004445]/60 uppercase mb-2 group-hover:text-[#004445] transition-colors">
             Sales & Inquiries
           </p>
-          <a
-            href="tel:+15551234567"
+          <p
             className="text-2xl md:text-3xl font-black text-[#0a1a1a] group-hover:text-teal-500 transition-colors inline-block"
           >
-            +1 (555) 123-4567
-          </a>
+            +94 71 160 9341
+          </p>
         </div>
         
         <div className="group">
           <p className="text-xs font-bold tracking-widest text-[#004445]/60 uppercase mb-2 group-hover:text-[#004445] transition-colors">
             Technical Support
           </p>
-          <a
-            href="tel:+15559876543"
+          <p
+          
             className="text-2xl md:text-3xl font-black text-[#0a1a1a] group-hover:text-teal-500 transition-colors inline-block"
           >
             +1 (555) 987-6543
-          </a>
+          </p>
         </div>
       </motion.div>
     </motion.div>
