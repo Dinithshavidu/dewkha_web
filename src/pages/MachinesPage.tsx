@@ -69,6 +69,24 @@ const allMachines = [
     image: "/images/P1S-combo-1.jpg",
     features: ["15-Minute Rapid Setup", "Fully Enclosed Design", "Multi-Color Versatility", "Farm-Grade Reliability", "Full-Scale Volume"],
   },
+
+  {
+    id: "M-009",
+    name: "Bambu Lab X2D 3D Printer",
+    type: "3D Printers",
+    price: "$4,100",
+    image: "/images/X2D-1.jpg",
+    features: ["Dual nozzle", "Servo Extruder", "Dual-intake cooling", "Active heating", "Adaptive Calibration", "AI Monitoring", "Certified Emissions"],
+    
+  },
+  {
+    id: "M-010",
+    name: "Bambu Lab X2D Combo 3D Printer",
+    type: "3D Printers",
+    price: "$5,500",
+    image: "/images/X2D-combo-1.jpg",
+    features: ["Dual nozzle", "Servo Extruder", "Dual-intake cooling", "Active heating", "Adaptive Calibration", "AI Monitoring", "Certified Emissions"],
+  },
 ];
 
 const categories = ["All", "3D Printers", "Laser Cutters", "Accessories"];

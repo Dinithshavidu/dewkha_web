@@ -1709,5 +1709,826 @@ Timelapse Supported`
     ],
 
   },
+
+  {
+    id: "M-009",
+    code: "DC-BBL-3PR-009",
+    name: "Bambu Lab X2D 3D Printer",
+    price: "$399",
+    whatsappNumber: "94711609341",
+    category: "3D Printers",
+    // 1. Image Gallery
+    images: [
+      "/images/X2D-1.jpg",
+      "/images/X2D-2.jpg",
+      "/images/X2D-3.jpg"
+    ],
+    // 2. Variants (Links to other machine IDs)
+    variants: [
+      { name: "X2D", image: "/images/X2D-1.jpg", price: "$299", id: "M-009" },
+      { name: "X2D Combo", image: "/images/X2D-combo-1.jpg", price: "$399", id: "M-010" }
+    ],
+    // 3. Features
+    features: [
+      "Dual nozzle - Multi-material made simple.",
+      "Servo Extruder - Smooth surfaces at full speed.",
+      "Dual-intake cooling - Crisp details.",
+      "Active heating - Stronger parts.",
+      "Adaptive Calibration - Lasting precision",
+      "AI Monitoring - Your built-in backup.",
+      "Certified Emissions - Designed for your home."
+    ],
+    // 4. Accessories
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
+    // 5. YouTube Embed IDs
+    productVideoId: "https://www.youtube.com/embed/hWcbP7yZsc4?si=JtpgIEDtBwvoYXl9",
+    unboxingVideoId: "https://www.youtube.com/embed/gE4_o2Wdhqk?si=PsBIeRx_1QAGZaL4",
+    // 6. Why Choose Cards
+    whyChoose: [
+      { image: "/images/X2D-choo-1.jpg", text: "Dual nozzle" },
+      { image: "/images/X2D-choo-2.jpg", text: "Servo Extruder" },
+      { image: "/images/X2D-choo-3.jpg", text: "Dual-intake cooling" },
+      { image: "/images/X2D-choo-4.jpg", text: "Active heating" },
+      { image: "/images/X2D-choo-5.jpg", text: "Adaptive Calibration" },
+      { image: "/images/X2D-choo-6.jpg", text: "AI Monitoring" },
+      { image: "/images/X2D-choo-7.jpg", text: "Certified Emissions" }
+    ],
+    // 7. Tech Specs Table (Structured for easy mapping)
+    specs: [
+  {
+    category: "Printing Technology",
+    rows: [
+      {
+        label: "Technology",
+        value: "Fused Deposition Modeling"
+      }
+    ]
+  },
+  {
+    category: "Body",
+    rows: [
+      {
+        label: "Build Volume (W × D × H)",
+        value: `Main Nozzle Printing: 256 × 256 × 260 mm³
+Auxiliary Nozzle Printing: 235.5 × 256 × 256 mm³
+Dual Nozzle Printing: 235.5 × 256 × 256 mm³
+Total Volume for Two Nozzles: 256 × 256 × 260 mm³`
+      },
+      {
+        label: "Chassis",
+        value: "Plastic and Steel"
+      },
+      {
+        label: "Outer Frame",
+        value: "Plastic, Glass, and Metal"
+      }
+    ]
+  },
+  {
+    category: "Dimensions and Weight",
+    rows: [
+      {
+        label: "Physical Dimensions",
+        value: `392 × 406 × 478 mm³
+Recommended printer space: 500 × 700 × 850 mm`
+      },
+      {
+        label: "Net Weight",
+        value: `16.25 kg
+Gross Weight (X2D): 20.2 kg
+Gross Weight (X2D AMS Combo): 22.2 kg`
+      }
+    ]
+  },
+  {
+    category: "Toolhead",
+    rows: [
+      {
+        label: "Main Extruder Gear",
+        value: "Hardened Steel"
+      },
+      {
+        label: "Main Extruder Motor",
+        value: "Bambu Lab High-Precision Permanent Magnet Synchronous Motor"
+      },
+      {
+        label: "Auxiliary Extruder Gear",
+        value: "Hardened Steel"
+      },
+      {
+        label: "Auxiliary Extruder Motor",
+        value: "Stepper Motor"
+      },
+      {
+        label: "Nozzle",
+        value: "Hardened Steel"
+      },
+      {
+        label: "Max Nozzle Temperature",
+        value: "300 °C"
+      },
+      {
+        label: "Included Nozzle Diameter",
+        value: "0.4 mm"
+      },
+      {
+        label: "Supported Nozzle Diameter",
+        value: "0.2 mm, 0.4 mm, 0.6 mm, 0.8 mm"
+      },
+      {
+        label: "Filament Cutter",
+        value: "Built-in"
+      },
+      {
+        label: "Filament Diameter",
+        value: "1.75 mm"
+      }
+    ]
+  },
+  {
+    category: "Heatbed",
+    rows: [
+      {
+        label: "Supported Build Plate Type",
+        value: `Textured PEI Plate
+Smooth PEI Plate
+Cool Plate SuperTack
+Engineering Plate`
+      },
+      {
+        label: "Max Heatbed Temperature",
+        value: "120 ℃"
+      }
+    ]
+  },
+  {
+    category: "Speed",
+    rows: [
+      {
+        label: "Max Speed of Toolhead",
+        value: "1000 mm/s"
+      },
+      {
+        label: "Max Acceleration of Toolhead",
+        value: "20,000 mm/s²"
+      },
+      {
+        label: "Max Flow (Standard Flow Hotend)",
+        value: `40 mm³/s
+(Test: 250 mm round model, single outer wall, Bambu Lab ABS, 280°C)`
+      },
+      {
+        label: "Max Flow (High Flow Hotend)",
+        value: `65 mm³/s
+(Test: 250 mm round model, single outer wall, Bambu Lab ABS, 280°C)`
+      }
+    ]
+  },
+  {
+    category: "Chamber Temperature Control",
+    rows: [
+      {
+        label: "Active Chamber Heating",
+        value: "Supported"
+      },
+      {
+        label: "Max Temperature",
+        value: "65 °C"
+      }
+    ]
+  },
+  {
+    category: "Air Purification",
+    rows: [
+      {
+        label: "Pre-filter Grade",
+        value: "G3"
+      },
+      {
+        label: "HEPA Filter Grade",
+        value: "H12"
+      },
+      {
+        label: "Activated Carbon Filter Type",
+        value: "Granulated Coconut Shell"
+      },
+      {
+        label: "VOC Filtration",
+        value: "Supported"
+      },
+      {
+        label: "Particulate Matter Filtration",
+        value: "Supported"
+      }
+    ]
+  },
+  {
+    category: "Cooling",
+    rows: [
+      { label: "Part Cooling Fan", value: "Closed Loop Control" },
+      { label: "Cooling Fan for Hotend", value: "Closed Loop Control" },
+      { label: "Main Control Board Fan", value: "Closed Loop Control" },
+      { label: "Chamber Exhaust Fan", value: "Closed Loop Control" },
+      { label: "Chamber Heat Circulation Fan", value: "Closed Loop Control" },
+      { label: "Auxiliary Part Cooling Fan", value: "Closed Loop Control" }
+    ]
+  },
+  {
+    category: "Filament Supported",
+    rows: [
+      {
+        label: "Main Hotend",
+        value: "PLA, PETG, ABS, ASA, TPU, PET, PA, PC, PVA, Carbon/Glass Fiber Reinforced PLA, PETG, ABS, ASA, PA6, PAHT, PPA, PET"
+      },
+      {
+        label: "Auxiliary Hotend",
+        value: "PLA (excluding PLA Aero), PETG, ABS, ASA, TPU for AMS, PET, PA, PC, PVA, Carbon/Glass Fiber Reinforced PLA, PETG, ABS, ASA, PA6, PAHT, PET"
+      },
+      {
+        label: "Auxiliary Hotend (Print with Caution)",
+        value: "PLA Silk, PETG-CF, ASA-CF, PA6-CF, TPU for AMS"
+      }
+    ]
+  },
+  {
+    category: "Sensors",
+    rows: [
+      {
+        label: "Live View Camera",
+        value: "Built-in; 1920 × 1080"
+      },
+      {
+        label: "Toolhead Camera",
+        value: "Built-in; 1600 × 1200"
+      },
+      {
+        label: "Door Sensor",
+        value: "Supported"
+      },
+      {
+        label: "Filament Run Out Sensor",
+        value: "Supported"
+      },
+      {
+        label: "Filament Tangle Sensor",
+        value: "Supported"
+      },
+      {
+        label: "Filament Odometry",
+        value: "Supported with AMS"
+      },
+      {
+        label: "Power Loss Recovery",
+        value: "Supported"
+      }
+    ]
+  },
+  {
+    category: "Electrical Requirements",
+    rows: [
+      {
+        label: "Voltage",
+        value: "100-120 VAC, 50/60 Hz"
+      },
+      {
+        label: "Max Power",
+        value: "1100 W @ 110 V"
+      },
+      {
+        label: "Steady-State Power",
+        value: `PLA (25°C): 250 W @ 110V
+PC (25°C): 550 W @ 110V`
+      }
+    ]
+  },
+  {
+    category: "Environment Requirements",
+    rows: [
+      {
+        label: "Working Temperature",
+        value: "10 °C - 30 °C"
+      }
+    ]
+  },
+  {
+    category: "Electronics",
+    rows: [
+      {
+        label: "Touchscreen",
+        value: "5-inch 1280 × 720 Touchscreen"
+      },
+      {
+        label: "Storage",
+        value: "Built-in 8 GB EMMC and USB Port"
+      },
+      {
+        label: "Control Interface",
+        value: "Touchscreen, Mobile App, PC App"
+      },
+      {
+        label: "Motion Controller",
+        value: "Dual-core Cortex-M4 and Single-core Cortex-M7"
+      },
+      {
+        label: "Application Processor",
+        value: "Quad-core ARM with Dedicated NPU"
+      }
+    ]
+  },
+  {
+    category: "Software",
+    rows: [
+      {
+        label: "Slicer",
+        value: "Bambu Studio"
+      },
+      {
+        label: "Supported Operating Systems",
+        value: "macOS, Windows, Linux"
+      },
+      {
+        label: "Third-Party Slicer Support",
+        value: "SuperSlicer, PrusaSlicer, Cura"
+      }
+    ]
+  },
+  {
+    category: "Network",
+    rows: [
+      {
+        label: "Ethernet",
+        value: "Not Available"
+      },
+      {
+        label: "Wireless Network",
+        value: "Dual-Band Wi-Fi"
+      },
+      {
+        label: "Network Kill Switch",
+        value: "Not Available"
+      },
+      {
+        label: "Removable Network Module",
+        value: "Not Available"
+      },
+      {
+        label: "802.1X Network Access Control",
+        value: "Not Available"
+      }
+    ]
+  },
+  {
+    category: "Wi-Fi",
+    rows: [
+      {
+        label: "Operating Frequency",
+        value: `2412 - 2472 MHz
+5150 - 5850 MHz (FCC/CE)
+2400 - 2483.5 MHz
+5150 - 5850 MHz (SRRC)`
+      },
+      {
+        label: "Wi-Fi Transmitter Power (EIRP)",
+        value: `2.4 GHz: <23 dBm (FCC), <20 dBm (CE/SRRC/MIC)
+5 GHz Band 1/2: <23 dBm
+5 GHz Band 3: <30 dBm (CE), <24 dBm (FCC)
+5 GHz Band 4: <23 dBm (FCC/SRRC), <14 dBm (CE)`
+      },
+      {
+        label: "Wi-Fi Protocol",
+        value: "IEEE 802.11 a/b/g/n"
+      }
+    ]
+  }
+],
+    // 8. What's in the Box
+    inTheBox: [
+      { name: "X2D", image: "/images/X2D-1.jpg" },
+      { name: "Textured PEI Build Plate", image: "/images/X2D-box-1.jpg" },
+      { name: "External Exhaust Fan Bundle", image: "/images/X2D-box-2.jpg" },
+      { name: "Accessory Box", image: "/images/X2D-box-3.jpg" },
+      { name: "Spool holder", image: "/images/X2D-box-4.jpg" },
+      
+    ],
+
+     addOns: [
+      { name: "AMS 2 Pro", image: "/images/X2D-add-1.jpg", variant: "X2D Combo" }
+    ]
+
+  },
+
+  {
+    id: "M-010",
+    code: "DC-BBL-3PR-010",
+    name: "Bambu Lab X2D Combo 3D Printer",
+    price: "$399",
+    whatsappNumber: "94711609341",
+    category: "3D Printers",
+    // 1. Image Gallery
+    images: [
+      "/images/X2D-combo-1.jpg",
+      "/images/X2D-1.jpg",
+      "/images/X2D-combo-2.jpg",
+      "/images/X2D-2.jpg",
+      "/images/X2D-combo-3.jpg",
+      "/images/X2D-3.jpg",
+      "/images/X2D-combo-4.jpg"
+    ],
+    // 2. Variants (Links to other machine IDs)
+    // variants: [
+    //   { name: "X2D Combo", image: "/images/X2D-combo-1.jpg", price: "$399", id: "M-010" },
+    //   { name: "X2D", image: "/images/X2D-1.jpg", price: "$299", id: "M-009" }
+    // ],
+    // 3. Features
+    features: [
+      "Dual nozzle - Multi-material made simple.",
+      "Servo Extruder - Smooth surfaces at full speed.",
+      "Dual-intake cooling - Crisp details.",
+      "Active heating - Stronger parts.",
+      "Adaptive Calibration - Lasting precision",
+      "AI Monitoring - Your built-in backup.",
+      "Certified Emissions - Designed for your home."
+    ],
+    // 4. Accessories
+    // accessories: [
+    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
+    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
+    // ],
+    // 5. YouTube Embed IDs
+    productVideoId: "https://www.youtube.com/embed/hWcbP7yZsc4?si=JtpgIEDtBwvoYXl9",
+    unboxingVideoId: "https://www.youtube.com/embed/h7c3fKEWPRs?si=_XgvsYlZTK7wTCzz",
+    // 6. Why Choose Cards
+    whyChoose: [
+      { image: "/images/X2D-choo-1.jpg", text: "Dual nozzle" },
+      { image: "/images/X2D-choo-2.jpg", text: "Servo Extruder" },
+      { image: "/images/X2D-choo-3.jpg", text: "Dual-intake cooling" },
+      { image: "/images/X2D-choo-4.jpg", text: "Active heating" },
+      { image: "/images/X2D-choo-5.jpg", text: "Adaptive Calibration" },
+      { image: "/images/X2D-choo-6.jpg", text: "AI Monitoring" },
+      { image: "/images/X2D-choo-7.jpg", text: "Certified Emissions" }
+    ],
+    // 7. Tech Specs Table (Structured for easy mapping)
+    specs: [
+  {
+    category: "Printing Technology",
+    rows: [
+      {
+        label: "Technology",
+        value: "Fused Deposition Modeling"
+      }
+    ]
+  },
+  {
+    category: "Body",
+    rows: [
+      {
+        label: "Build Volume (W × D × H)",
+        value: `Main Nozzle Printing: 256 × 256 × 260 mm³
+Auxiliary Nozzle Printing: 235.5 × 256 × 256 mm³
+Dual Nozzle Printing: 235.5 × 256 × 256 mm³
+Total Volume for Two Nozzles: 256 × 256 × 260 mm³`
+      },
+      {
+        label: "Chassis",
+        value: "Plastic and Steel"
+      },
+      {
+        label: "Outer Frame",
+        value: "Plastic, Glass, and Metal"
+      }
+    ]
+  },
+  {
+    category: "Dimensions and Weight",
+    rows: [
+      {
+        label: "Physical Dimensions",
+        value: `392 × 406 × 478 mm³
+Recommended printer space: 500 × 700 × 850 mm`
+      },
+      {
+        label: "Net Weight",
+        value: `16.25 kg
+Gross Weight (X2D): 20.2 kg
+Gross Weight (X2D AMS Combo): 22.2 kg`
+      }
+    ]
+  },
+  {
+    category: "Toolhead",
+    rows: [
+      {
+        label: "Main Extruder Gear",
+        value: "Hardened Steel"
+      },
+      {
+        label: "Main Extruder Motor",
+        value: "Bambu Lab High-Precision Permanent Magnet Synchronous Motor"
+      },
+      {
+        label: "Auxiliary Extruder Gear",
+        value: "Hardened Steel"
+      },
+      {
+        label: "Auxiliary Extruder Motor",
+        value: "Stepper Motor"
+      },
+      {
+        label: "Nozzle",
+        value: "Hardened Steel"
+      },
+      {
+        label: "Max Nozzle Temperature",
+        value: "300 °C"
+      },
+      {
+        label: "Included Nozzle Diameter",
+        value: "0.4 mm"
+      },
+      {
+        label: "Supported Nozzle Diameter",
+        value: "0.2 mm, 0.4 mm, 0.6 mm, 0.8 mm"
+      },
+      {
+        label: "Filament Cutter",
+        value: "Built-in"
+      },
+      {
+        label: "Filament Diameter",
+        value: "1.75 mm"
+      }
+    ]
+  },
+  {
+    category: "Heatbed",
+    rows: [
+      {
+        label: "Supported Build Plate Type",
+        value: `Textured PEI Plate
+Smooth PEI Plate
+Cool Plate SuperTack
+Engineering Plate`
+      },
+      {
+        label: "Max Heatbed Temperature",
+        value: "120 ℃"
+      }
+    ]
+  },
+  {
+    category: "Speed",
+    rows: [
+      {
+        label: "Max Speed of Toolhead",
+        value: "1000 mm/s"
+      },
+      {
+        label: "Max Acceleration of Toolhead",
+        value: "20,000 mm/s²"
+      },
+      {
+        label: "Max Flow (Standard Flow Hotend)",
+        value: `40 mm³/s
+(Test: 250 mm round model, single outer wall, Bambu Lab ABS, 280°C)`
+      },
+      {
+        label: "Max Flow (High Flow Hotend)",
+        value: `65 mm³/s
+(Test: 250 mm round model, single outer wall, Bambu Lab ABS, 280°C)`
+      }
+    ]
+  },
+  {
+    category: "Chamber Temperature Control",
+    rows: [
+      {
+        label: "Active Chamber Heating",
+        value: "Supported"
+      },
+      {
+        label: "Max Temperature",
+        value: "65 °C"
+      }
+    ]
+  },
+  {
+    category: "Air Purification",
+    rows: [
+      {
+        label: "Pre-filter Grade",
+        value: "G3"
+      },
+      {
+        label: "HEPA Filter Grade",
+        value: "H12"
+      },
+      {
+        label: "Activated Carbon Filter Type",
+        value: "Granulated Coconut Shell"
+      },
+      {
+        label: "VOC Filtration",
+        value: "Supported"
+      },
+      {
+        label: "Particulate Matter Filtration",
+        value: "Supported"
+      }
+    ]
+  },
+  {
+    category: "Cooling",
+    rows: [
+      { label: "Part Cooling Fan", value: "Closed Loop Control" },
+      { label: "Cooling Fan for Hotend", value: "Closed Loop Control" },
+      { label: "Main Control Board Fan", value: "Closed Loop Control" },
+      { label: "Chamber Exhaust Fan", value: "Closed Loop Control" },
+      { label: "Chamber Heat Circulation Fan", value: "Closed Loop Control" },
+      { label: "Auxiliary Part Cooling Fan", value: "Closed Loop Control" }
+    ]
+  },
+  {
+    category: "Filament Supported",
+    rows: [
+      {
+        label: "Main Hotend",
+        value: "PLA, PETG, ABS, ASA, TPU, PET, PA, PC, PVA, Carbon/Glass Fiber Reinforced PLA, PETG, ABS, ASA, PA6, PAHT, PPA, PET"
+      },
+      {
+        label: "Auxiliary Hotend",
+        value: "PLA (excluding PLA Aero), PETG, ABS, ASA, TPU for AMS, PET, PA, PC, PVA, Carbon/Glass Fiber Reinforced PLA, PETG, ABS, ASA, PA6, PAHT, PET"
+      },
+      {
+        label: "Auxiliary Hotend (Print with Caution)",
+        value: "PLA Silk, PETG-CF, ASA-CF, PA6-CF, TPU for AMS"
+      }
+    ]
+  },
+  {
+    category: "Sensors",
+    rows: [
+      {
+        label: "Live View Camera",
+        value: "Built-in; 1920 × 1080"
+      },
+      {
+        label: "Toolhead Camera",
+        value: "Built-in; 1600 × 1200"
+      },
+      {
+        label: "Door Sensor",
+        value: "Supported"
+      },
+      {
+        label: "Filament Run Out Sensor",
+        value: "Supported"
+      },
+      {
+        label: "Filament Tangle Sensor",
+        value: "Supported"
+      },
+      {
+        label: "Filament Odometry",
+        value: "Supported with AMS"
+      },
+      {
+        label: "Power Loss Recovery",
+        value: "Supported"
+      }
+    ]
+  },
+  {
+    category: "Electrical Requirements",
+    rows: [
+      {
+        label: "Voltage",
+        value: "100-120 VAC, 50/60 Hz"
+      },
+      {
+        label: "Max Power",
+        value: "1100 W @ 110 V"
+      },
+      {
+        label: "Steady-State Power",
+        value: `PLA (25°C): 250 W @ 110V
+PC (25°C): 550 W @ 110V`
+      }
+    ]
+  },
+  {
+    category: "Environment Requirements",
+    rows: [
+      {
+        label: "Working Temperature",
+        value: "10 °C - 30 °C"
+      }
+    ]
+  },
+  {
+    category: "Electronics",
+    rows: [
+      {
+        label: "Touchscreen",
+        value: "5-inch 1280 × 720 Touchscreen"
+      },
+      {
+        label: "Storage",
+        value: "Built-in 8 GB EMMC and USB Port"
+      },
+      {
+        label: "Control Interface",
+        value: "Touchscreen, Mobile App, PC App"
+      },
+      {
+        label: "Motion Controller",
+        value: "Dual-core Cortex-M4 and Single-core Cortex-M7"
+      },
+      {
+        label: "Application Processor",
+        value: "Quad-core ARM with Dedicated NPU"
+      }
+    ]
+  },
+  {
+    category: "Software",
+    rows: [
+      {
+        label: "Slicer",
+        value: "Bambu Studio"
+      },
+      {
+        label: "Supported Operating Systems",
+        value: "macOS, Windows, Linux"
+      },
+      {
+        label: "Third-Party Slicer Support",
+        value: "SuperSlicer, PrusaSlicer, Cura"
+      }
+    ]
+  },
+  {
+    category: "Network",
+    rows: [
+      {
+        label: "Ethernet",
+        value: "Not Available"
+      },
+      {
+        label: "Wireless Network",
+        value: "Dual-Band Wi-Fi"
+      },
+      {
+        label: "Network Kill Switch",
+        value: "Not Available"
+      },
+      {
+        label: "Removable Network Module",
+        value: "Not Available"
+      },
+      {
+        label: "802.1X Network Access Control",
+        value: "Not Available"
+      }
+    ]
+  },
+  {
+    category: "Wi-Fi",
+    rows: [
+      {
+        label: "Operating Frequency",
+        value: `2412 - 2472 MHz
+5150 - 5850 MHz (FCC/CE)
+2400 - 2483.5 MHz
+5150 - 5850 MHz (SRRC)`
+      },
+      {
+        label: "Wi-Fi Transmitter Power (EIRP)",
+        value: `2.4 GHz: <23 dBm (FCC), <20 dBm (CE/SRRC/MIC)
+5 GHz Band 1/2: <23 dBm
+5 GHz Band 3: <30 dBm (CE), <24 dBm (FCC)
+5 GHz Band 4: <23 dBm (FCC/SRRC), <14 dBm (CE)`
+      },
+      {
+        label: "Wi-Fi Protocol",
+        value: "IEEE 802.11 a/b/g/n"
+      }
+    ]
+  }
+],
+    // 8. What's in the Box
+    inTheBox: [
+      { name: "X2D combo", image: "/images/X2D-combo-1.jpg" },
+      { name: "Textured PEI Build Plate", image: "/images/X2D-box-1.jpg" },
+      { name: "External Exhaust Fan Bundle", image: "/images/X2D-box-2.jpg" },
+      { name: "Accessory Box", image: "/images/X2D-box-3.jpg" },
+      { name: "Spool holder", image: "/images/X2D-box-4.jpg" },
+      { name: "AMS 2 Pro", image: "/images/X2D-add-1.jpg" }
+      
+    ],
+
+  },
   // Add your next machine here...
 ];
