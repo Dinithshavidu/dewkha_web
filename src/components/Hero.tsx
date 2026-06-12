@@ -1,8 +1,7 @@
-import { motion, useScroll, useTransform, useSpring, animate } from "motion/react";
+import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-// ─── Each SVG object is revealed bottom→top with a moving nozzle ─────────────
 type PrintedObjectProps = {
   children: React.ReactNode;
   viewBox: string;
@@ -37,7 +36,7 @@ function PrintedObject({
       let frame = 0;
       const interval = setInterval(() => {
         frame++;
-        const revealedFromBottom = frame; // px from bottom revealed
+        const revealedFromBottom = frame; 
         const clipY = vbHeight - revealedFromBottom;
 
         if (clipRectRef.current) {
@@ -50,7 +49,6 @@ function PrintedObject({
 
         if (frame >= vbHeight) {
           clearInterval(interval);
-          // hide nozzle after done
           setTimeout(() => {
             if (nozzleRef.current) nozzleRef.current.setAttribute("opacity", "0");
           }, 400);
@@ -80,16 +78,10 @@ function PrintedObject({
               <rect ref={clipRectRef} x="-10" y={vbH} width={vbW + 20} height="2" />
             </clipPath>
           </defs>
-
-          {/* Base plate */}
           <rect x="0" y={vbH - 2} width={vbW} height="3" rx="1" fill="#0a1a1a" opacity="0.5" />
-
-          {/* Object clipped to revealed region */}
           <g clipPath={`url(#${clipId})`}>
             {children}
           </g>
-
-          {/* Nozzle glow line */}
           <rect
             ref={nozzleRef}
             x="-4"
@@ -113,34 +105,25 @@ function PrintedObject({
   );
 }
 
-// ─── OBJECTS ──────────────────────────────────────────────────────────────────
-
-// 1. Vase
 function VaseSVG() {
   return (
     <>
-      {/* Vase body */}
       <path
         d="M 30 120 Q 10 100 8 70 Q 6 40 20 20 Q 28 8 40 6 Q 52 4 60 6 Q 72 8 80 20 Q 94 40 92 70 Q 90 100 70 120 Z"
         fill="#0f1f1f"
         stroke="#1a3a3a"
         strokeWidth="1"
       />
-      {/* Neck */}
       <rect x="32" y="2" width="36" height="8" rx="3" fill="#0a1a1a" />
-      {/* Rim */}
       <ellipse cx="50" cy="4" rx="20" ry="4" fill="#152525" />
-      {/* Layer lines for FDM texture */}
       {[20,30,40,50,60,70,80,90,100,110].map(y => (
         <line key={y} x1="12" y1={y} x2="88" y2={y} stroke="#2dd4bf" strokeWidth="0.4" opacity="0.15" />
       ))}
-      {/* Highlight ridge */}
       <path d="M 22 80 Q 18 60 26 35" stroke="#1e3535" strokeWidth="3" fill="none" strokeLinecap="round" />
     </>
   );
 }
 
-// 2. Gear
 function GearSVG() {
   const teeth = 10;
   const r1 = 38, r2 = 46, cx = 55, cy = 55;
@@ -169,20 +152,14 @@ function GearSVG() {
   );
 }
 
-// 3. Isometric cube
 function CubeSVG() {
   return (
     <>
-      {/* Top face */}
       <polygon points="50,8 90,30 50,52 10,30" fill="#152828" stroke="#1e3535" strokeWidth="0.8" />
-      {/* Left face */}
       <polygon points="10,30 50,52 50,95 10,73" fill="#0a1a1a" stroke="#1a2e2e" strokeWidth="0.8" />
-      {/* Right face */}
       <polygon points="90,30 50,52 50,95 90,73" fill="#0f2020" stroke="#1a3030" strokeWidth="0.8" />
-      {/* Edge highlights */}
       <line x1="50" y1="8" x2="50" y2="52" stroke="#2dd4bf" strokeWidth="0.6" opacity="0.3" />
       <line x1="50" y1="52" x2="50" y2="95" stroke="#2dd4bf" strokeWidth="0.5" opacity="0.2" />
-      {/* Layer lines */}
       {[40,52,64,76].map(y => (
         <line key={y} x1="10" y1={y} x2="90" y2={y} stroke="#2dd4bf" strokeWidth="0.35" opacity="0.13" />
       ))}
@@ -190,23 +167,16 @@ function CubeSVG() {
   );
 }
 
-// 4. Trophy
 function TrophySVG() {
   return (
     <>
-      {/* Cup */}
       <path d="M 25 10 Q 15 30 18 55 Q 22 75 50 80 Q 78 75 82 55 Q 85 30 75 10 Z" fill="#0f1f1f" stroke="#1a3030" strokeWidth="1" />
-      {/* Handles */}
       <path d="M 25 25 Q 6 30 8 50 Q 10 65 25 62" fill="none" stroke="#0a1a1a" strokeWidth="6" strokeLinecap="round" />
       <path d="M 75 25 Q 94 30 92 50 Q 90 65 75 62" fill="none" stroke="#0a1a1a" strokeWidth="6" strokeLinecap="round" />
-      {/* Stem */}
       <rect x="44" y="80" width="12" height="22" rx="2" fill="#0a1a1a" />
-      {/* Base */}
       <rect x="28" y="100" width="44" height="8" rx="3" fill="#0a1414" />
       <rect x="32" y="106" width="36" height="6" rx="2" fill="#0f1f1f" />
-      {/* Star */}
       <polygon points="50,30 53,40 63,40 55,46 58,56 50,50 42,56 45,46 37,40 47,40" fill="#152828" stroke="#1e3535" strokeWidth="0.5" />
-      {/* Layer lines */}
       {[20,35,50,65,80,95].map(y => (
         <line key={y} x1="16" y1={y} x2="84" y2={y} stroke="#2dd4bf" strokeWidth="0.4" opacity="0.12" />
       ))}
@@ -214,19 +184,13 @@ function TrophySVG() {
   );
 }
 
-// 5. Phone stand
 function PhoneStandSVG() {
   return (
     <>
-      {/* Back support */}
       <path d="M 30 10 L 40 10 L 70 85 L 60 85 Z" fill="#0f1f1f" stroke="#1a3030" strokeWidth="0.8" />
-      {/* Front leg */}
       <path d="M 48 55 L 56 55 L 65 85 L 57 85 Z" fill="#0a1a1a" stroke="#152525" strokeWidth="0.8" />
-      {/* Phone slot ledge */}
       <rect x="22" y="28" width="56" height="7" rx="2" fill="#152828" stroke="#1e3535" strokeWidth="0.7" />
-      {/* Base */}
       <rect x="20" y="83" width="60" height="7" rx="3" fill="#0a1414" />
-      {/* Layer lines */}
       {[20,35,50,65,80].map(y => (
         <line key={y} x1="20" y1={y} x2="80" y2={y} stroke="#2dd4bf" strokeWidth="0.4" opacity="0.12" />
       ))}
@@ -234,19 +198,13 @@ function PhoneStandSVG() {
   );
 }
 
-// 6. Pyramid
 function PyramidSVG() {
   return (
     <>
-      {/* Left face */}
       <polygon points="50,5 10,90 50,90" fill="#0f1f1f" stroke="#1a3030" strokeWidth="0.8" />
-      {/* Right face */}
       <polygon points="50,5 90,90 50,90" fill="#152828" stroke="#1e3535" strokeWidth="0.8" />
-      {/* Base */}
       <rect x="10" y="88" width="80" height="5" rx="1" fill="#0a1414" />
-      {/* Apex glow */}
       <circle cx="50" cy="5" r="3" fill="#2dd4bf" opacity="0.4" />
-      {/* Layer lines */}
       {[20,35,50,65,80].map(y => (
         <line key={y} x1={10 + (y-5)*0.44} y1={y} x2={90 - (y-5)*0.44} y2={y} stroke="#2dd4bf" strokeWidth="0.4" opacity="0.15" />
       ))}
@@ -254,17 +212,12 @@ function PyramidSVG() {
   );
 }
 
-// 7. Abstract arch / doorway
 function ArchSVG() {
   return (
     <>
-      {/* Arch body */}
       <path d="M 15 100 L 15 50 Q 15 5 50 5 Q 85 5 85 50 L 85 100 Z" fill="#0f1f1f" stroke="#1a3030" strokeWidth="1" />
-      {/* Inner cutout */}
       <path d="M 28 100 L 28 52 Q 28 20 50 20 Q 72 20 72 52 L 72 100 Z" fill="#f8fafa" />
-      {/* Base */}
       <rect x="12" y="98" width="76" height="6" rx="2" fill="#0a1414" />
-      {/* Layer lines */}
       {[25,40,55,70,85].map(y => (
         <line key={y} x1="15" y1={y} x2="85" y2={y} stroke="#2dd4bf" strokeWidth="0.4" opacity="0.13" />
       ))}
@@ -272,7 +225,6 @@ function ArchSVG() {
   );
 }
 
-// ─── Positioned objects config ────────────────────────────────────────────────
 const OBJECTS = [
   { id: "vase",       Component: VaseSVG,      vb: "0 0 100 125", w: 72,  h: 90,  pos: { left: "4%",  top: "8%"  }, delay: 0.2,  dur: 3.2  },
   { id: "gear",       Component: GearSVG,      vb: "0 0 110 110", w: 88,  h: 88,  pos: { left: "76%", top: "5%"  }, delay: 0.6,  dur: 3.0  },
@@ -283,7 +235,6 @@ const OBJECTS = [
   { id: "arch",       Component: ArchSVG,      vb: "0 0 100 108", w: 68,  h: 72,  pos: { left: "22%", top: "66%" }, delay: 1.2,  dur: 3.0  },
 ];
 
-// ─── Main Hero ────────────────────────────────────────────────────────────────
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
@@ -294,7 +245,6 @@ export function Hero() {
   const rotateX   = useTransform(scrollYProgress, [0, 0.5], [0, 5]);
   const ySpring   = useSpring(yContent, { stiffness: 60, damping: 18 });
 
-  // Parallax for each object at different rates
   const depths = [0.4, 0.55, 0.5, 0.45, 0.6, 0.35, 0.5];
 
   return (
@@ -302,7 +252,6 @@ export function Hero() {
       ref={containerRef}
       className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-[#f8fafa]"
     >
-      {/* Subtle dot grid */}
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -311,11 +260,9 @@ export function Hero() {
         }}
       />
 
-      {/* Ambient blobs */}
       <div className="absolute top-1/4 -left-64 w-[480px] h-[480px] bg-teal-400 rounded-full mix-blend-multiply filter blur-[160px] opacity-[0.07] pointer-events-none" />
       <div className="absolute bottom-1/4 -right-64 w-[480px] h-[480px] bg-teal-700 rounded-full mix-blend-multiply filter blur-[160px] opacity-[0.07] pointer-events-none" />
 
-      {/* ── Scattered 3D printed objects ── */}
       {OBJECTS.map(({ id, Component, vb, w, h, pos, delay, dur }, i) => {
         const yObj = useTransform(scrollYProgress, [0, 1], [0, -260 * depths[i]]);
         return (
@@ -327,7 +274,6 @@ export function Hero() {
         );
       })}
 
-      {/* ── Center content ── */}
       <motion.div
         className="relative z-20 text-center px-4 sm:px-8 max-w-4xl mx-auto"
         style={{
@@ -388,22 +334,28 @@ export function Hero() {
           premium cutting services, and sell industry-grade machines.
         </motion.p>
 
-        {/* Buttons */}
+        {/* Buttons (Rearranged: Services first, then Products, then Machines) */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-6 justify-center"
+          className="flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 justify-center items-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8, ease: "easeOut" }}
         >
           <Link
-            to="/products"
+            to="/services"
             className="inline-flex justify-center items-center px-12 py-5 text-lg font-black rounded-full text-[#f0fafa] bg-[#0a1a1a] hover:bg-black transition-all shadow-[0_0_40px_rgba(10,40,40,0.15)] transform hover:scale-105 hover:-translate-y-1"
+          >
+            Our Services
+          </Link>
+          <Link
+            to="/products"
+            className="inline-flex justify-center items-center px-12 py-5 text-lg font-black rounded-full text-[#0a1a1a] bg-transparent border-2 border-teal-600 hover:bg-teal-600/10 transition-all transform hover:scale-105 hover:-translate-y-1"
           >
             Buy Products
           </Link>
           <Link
             to="/machines"
-            className="inline-flex justify-center items-center px-12 py-5 text-lg font-black rounded-full text-[#0a1a1a] bg-transparent border-2 border-teal-600 hover:bg-teal-600/10 transition-all transform hover:scale-105 hover:-translate-y-1"
+            className="inline-flex justify-center items-center px-12 py-5 text-lg font-black rounded-full text-teal-900 bg-teal-100 hover:bg-teal-200 transition-all transform hover:scale-105 hover:-translate-y-1"
           >
             Buy Machines
           </Link>

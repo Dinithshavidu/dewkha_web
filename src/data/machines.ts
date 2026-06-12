@@ -1,6 +1,66 @@
-// src/data/machines.ts
+// 1. Define the types for the nested objects
+export type Accessory = {
+  name: string;
+  code: string;
+  price: string;
+  image: string;
+};
 
-export const machinesDB = [
+export type Variant = {
+  name: string;
+  image: string;
+  price: string;
+  id: string;
+};
+
+export type WhyChoose = {
+  image: string;
+  text: string;
+};
+
+export type SpecRow = {
+  label: string;
+  value: string;
+};
+
+export type SpecCategory = {
+  category: string;
+  rows: SpecRow[];
+};
+
+export type InTheBoxItem = {
+  name: string;
+  image: string;
+};
+
+export type AddOn = {
+  name: string;
+  image: string;
+  variant: string;
+};
+
+// 2. Define the main Machine type (all optional arrays use '?')
+export type Machine = {
+  id: string;
+  code: string;
+  name: string;
+  price: string;
+  whatsappNumber: string;
+  category: string;
+  images: string[];
+  variants?: Variant[];
+  features?: string[];
+  accessories?: Accessory[];
+  productVideoId?: string;
+  unboxingVideoId?: string;
+  whyChoose?: WhyChoose[];
+  specs?: SpecCategory[];
+  inTheBox?: InTheBoxItem[];
+  addOns?: AddOn[];
+};
+
+// 3. Apply the type to the array
+export const machinesDB: Machine[] = [
   {
     id: "M-001",
     code: "DC-BBL-3PR-004",
@@ -34,10 +94,7 @@ export const machinesDB = [
       "To connect the A1 printer to the AMS/ AMS 2 Pro/ AMS HT, an AMS HUB (SA013) accessory is needed."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/vhBLetZHJK0?si=8J9rUi9Ud6zkJUOG",
     unboxingVideoId: "https://www.youtube.com/embed/43UNZvhyqJk?si=JxFrrXnjTw_1TE2j",
@@ -186,10 +243,7 @@ export const machinesDB = [
       "To connect the A1 printer to the AMS/ AMS 2 Pro/ AMS HT, an AMS HUB (SA013) accessory is needed."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/vhBLetZHJK0?si=8J9rUi9Ud6zkJUOG",
     unboxingVideoId: "https://www.youtube.com/embed/43UNZvhyqJk?si=JxFrrXnjTw_1TE2j",
@@ -320,7 +374,7 @@ export const machinesDB = [
       "/images/A1-mini-1.jpg",
       "/images/A1-mini-2.jpg",
       "/images/A1-mini-3.jpg",
-     
+      
     ],
     // 2. Variants (Links to other machine IDs)
     variants: [
@@ -337,10 +391,7 @@ export const machinesDB = [
       "To connect the A1 mini printer to the AMS/ AMS 2 Pro/ AMS HT, an AMS HUB (SA013) accessory is needed."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/QVTbHuwVnZc?si=-2nb-_ZNVqvHImMJ",
     unboxingVideoId: "https://www.youtube.com/embed/uhyYlKnhUbM?si=_Zs-sdmIKX6STaYE",
@@ -500,10 +551,7 @@ Timelapse Supported`
       "To connect the A1 mini printer to the AMS/ AMS 2 Pro/ AMS HT, an AMS HUB (SA013) accessory is needed."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/QVTbHuwVnZc?si=-2nb-_ZNVqvHImMJ",
     unboxingVideoId: "https://www.youtube.com/embed/uhyYlKnhUbM?si=_Zs-sdmIKX6STaYE",
@@ -668,10 +716,7 @@ Timelapse Supported`
       "Indoor Safe: UL 2904 GREENGUARD certified for emission safety."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/vhBLetZHJK0?si=6YdppipPCek_gyrd",
     unboxingVideoId: "https://www.youtube.com/embed/eWPBXls2WkI?si=BFASwIGrzvnUv-Pj",
@@ -881,13 +926,16 @@ Supports timelapse photography`
 ],
     // 8. What's in the Box
     inTheBox: [
-      { name: "A2L Combo", image: "/images/A2L-combo-1.jpg" },
+      { name: "A2L", image: "/images/A2L-1.jpg" },
       { name: "Tool Box", image: "/images/A2L-box-1.jpg" },
       { name: "Build Plate", image: "/images/A1-box-7.jpg" },
-      { name: "Spool Holder", image: "/images/A2L-box-3.jpg" },
-      { name: "AMS lite ", image: "/images/A2L-combo-box-1.jpg" },
+      { name: "Spool Holder", image: "/images/A2L-box-3.jpg" }
       
     ],
+
+     addOns: [
+      { name: "AMS lite", image: "/images/A2L-combo-box-1.jpg", variant: "A2L Combo" },
+    ]
 
   },
 
@@ -923,10 +971,7 @@ Supports timelapse photography`
       "Indoor Safe: UL 2904 GREENGUARD certified for emission safety."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/vhBLetZHJK0?si=6YdppipPCek_gyrd",
     unboxingVideoId: "https://www.youtube.com/embed/43UNZvhyqJk?si=NrDT_oawyg3dZuE0",
@@ -1179,10 +1224,7 @@ Supports timelapse photography`
       "Full-Scale Volume: A generous 256 × 256 × 256 mm³ build space for your large projects."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
     
     unboxingVideoId: "https://www.youtube.com/embed/6cv-PQWit3g?si=AslF7CwEFvoXqVh1",
@@ -1461,10 +1503,7 @@ Timelapse Supported`
       "Full-Scale Volume: A generous 256 × 256 × 256 mm³ build space for your large projects."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
    
     unboxingVideoId: "https://www.youtube.com/embed/1Thb5LgGxUM?si=8_dztpAirKUNNpMh",
@@ -1693,20 +1732,23 @@ Timelapse Supported`
 ],
     // 8. What's in the Box
     inTheBox: [
-      { name: "Bambu Lab P1S Combo", image: "/images/P1S-combo-1.jpg" },
+      { name: "Bambu Lab P1S", image: "/images/P1S-box-01.jpg" },
       { name: "Stainless Steel Hotend with Nozzle", image: "/images/P1S-box-1.jpg" },
       { name: "Build Plate", image: "/images/P1S-box-2.jpg" },
       { name: "Bambu PLA Filament(with a spool) (*This will not be included in P1S AMS 2 Pro Combo)", image: "/images/P1S-box-3.jpg" },
       { name: "Unclogging Pin Tool", image: "/images/P1S-4.jpg" },
       { name: "Power Cable", image: "/images/P1S-box-5.jpg" },
       { name: "Accessory Box", image: "/images/P1S-box-6.jpg" },
-      { name: "Bambu Lab AMS", image: "/images/P1S-add-1.jpg" },
-      { name: "Spare Filament Cutter (x2)", image: "/images/P1S-add-2.jpg" },
-      { name: "Bambu Bus Cable-6Pin", image: "/images/P1S-add-3.jpg" },
-      { name: "Bambu Bus Cable-4Pin", image: "/images/P1S-add-4.jpg" },
-      { name: "Bambu Filament Samples (Random Color/Type，Contains 2 spools)", image: "/images/P1S-add-5.jpg" },
       
     ],
+
+     addOns: [
+      { name: "Bambu Lab AMS", image: "/images/P1S-add-1.jpg", variant: "P1S Combo" },
+      { name: "Spare Filament Cutter (x2)", image: "/images/P1S-add-2.jpg", variant: "P1S Combo" },
+      { name: "Bambu Bus Cable-6Pin", image: "/images/P1S-add-3.jpg", variant: "P1S Combo" },
+      { name: "Bambu Bus Cable-4Pin", image: "/images/P1S-add-4.jpg", variant: "P1S Combo" },
+      { name: "Bambu Filament Samples (Random Color/Type，Contains 2 spools)", image: "/images/P1S-add-5.jpg", variant: "P1S Combo" }
+    ]
 
   },
 
@@ -1739,10 +1781,7 @@ Timelapse Supported`
       "Certified Emissions - Designed for your home."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/hWcbP7yZsc4?si=JtpgIEDtBwvoYXl9",
     unboxingVideoId: "https://www.youtube.com/embed/gE4_o2Wdhqk?si=PsBIeRx_1QAGZaL4",
@@ -2138,10 +2177,10 @@ PC (25°C): 550 W @ 110V`
       "/images/X2D-combo-4.jpg"
     ],
     // 2. Variants (Links to other machine IDs)
-    // variants: [
-    //   { name: "X2D Combo", image: "/images/X2D-combo-1.jpg", price: "$399", id: "M-010" },
-    //   { name: "X2D", image: "/images/X2D-1.jpg", price: "$299", id: "M-009" }
-    // ],
+    variants: [
+      { name: "X2D Combo", image: "/images/X2D-combo-1.jpg", price: "$399", id: "M-010" },
+      { name: "X2D", image: "/images/X2D-1.jpg", price: "$299", id: "M-009" }
+    ],
     // 3. Features
     features: [
       "Dual nozzle - Multi-material made simple.",
@@ -2153,10 +2192,7 @@ PC (25°C): 550 W @ 110V`
       "Certified Emissions - Designed for your home."
     ],
     // 4. Accessories
-    // accessories: [
-    //   { name: "Purge Wiper - A1 Series", price: "$3.49", image: "/images/A1-fea-1.jpg", code: "ACC-01" },
-    //   { name: "Replacement Filament Cutter", price: "$2.09", image: "/images/A1-fea-2.jpg", code: "ACC-02" }
-    // ],
+    accessories: [],
     // 5. YouTube Embed IDs
     productVideoId: "https://www.youtube.com/embed/hWcbP7yZsc4?si=JtpgIEDtBwvoYXl9",
     unboxingVideoId: "https://www.youtube.com/embed/h7c3fKEWPRs?si=_XgvsYlZTK7wTCzz",
@@ -2528,7 +2564,6 @@ PC (25°C): 550 W @ 110V`
       { name: "AMS 2 Pro", image: "/images/X2D-add-1.jpg" }
       
     ],
-
+    addOns: []
   },
-  // Add your next machine here...
 ];

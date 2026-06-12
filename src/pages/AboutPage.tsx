@@ -3,8 +3,7 @@ import { Customization } from "../components/Customization";
 
 export function AboutPage() {
   return (
-    // Added pt-6, background color, and a minimum height to match your other pages
-    <div className="animate-in fade-in duration-700 pt-6 pb-32 bg-[#f8fafa] min-h-screen">
+    <div className="animate-in fade-in duration-700 pt-2 sm:pt-6 pb-16 md:pb-32 bg-[#f8fafa] min-h-screen overflow-hidden">
       <About />
       <Customization />
     </div>

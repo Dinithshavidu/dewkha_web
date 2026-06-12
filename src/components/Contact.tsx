@@ -26,6 +26,7 @@ function SocialButton({
   const springY = useSpring(my, { stiffness: 220, damping: 16 });
 
   function handleMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -33,6 +34,7 @@ function SocialButton({
     my.set((e.clientY - rect.top - rect.height / 2) * 0.35);
   }
   function handleMouseLeave() {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
     mx.set(0);
     my.set(0);
   }
@@ -42,7 +44,8 @@ function SocialButton({
       ref={ref}
       href={href}
       style={{ x: springX, y: springY }}
-      className="w-16 h-16 rounded-2xl bg-white border border-[#004445]/15 flex items-center justify-center shadow-sm relative overflow-hidden group transition-colors duration-300"
+      // Adjusted size for mobile: w-14 h-14, scaling up on sm screens
+      className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border border-[#004445]/15 flex items-center justify-center shadow-sm relative overflow-hidden group transition-colors duration-300 shrink-0"
       initial={{ opacity: 0, scale: 0.4, rotate: -20 }}
       whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
       viewport={{ once: true }}
@@ -53,7 +56,7 @@ function SocialButton({
         delay,
       }}
       whileHover={{
-        scale: 1.18,
+        scale: 1.15,
         borderColor: "rgba(0,68,69,0.35)",
         boxShadow: "0 8px 28px rgba(0,68,69,0.18)",
       }}
@@ -96,8 +99,9 @@ function FormField({
   const [focused, setFocused] = useState(false);
   const [filled, setFilled] = useState(false);
 
+  // Scaled padding for mobile screens
   const inputClass =
-    "w-full px-6 py-5 rounded-2xl bg-[#f8fafa] border outline-none transition-all placeholder:text-[#0a1a1a]/30 text-[#0a1a1a] " +
+    "w-full px-4 py-4 sm:px-6 sm:py-5 rounded-2xl bg-[#f8fafa] border outline-none transition-all placeholder:text-[#0a1a1a]/30 text-[#0a1a1a] text-sm sm:text-base " +
     (focused
       ? "border-[#004445]/50 ring-2 ring-[#004445]/20"
       : "border-[#004445]/15");
@@ -117,7 +121,7 @@ function FormField({
       {/* Label slides down when focused/filled */}
       <motion.label
         htmlFor={id}
-        className="block text-sm font-bold mb-3 tracking-wide"
+        className="block text-xs sm:text-sm font-bold mb-2 sm:mb-3 tracking-wide"
         animate={{
           color: focused ? "#004445" : "#0a1a1a",
           x: focused ? 2 : 0,
@@ -190,6 +194,58 @@ function FormField({
   );
 }
 
+// ─── Stat counter block ───────────────────────────────────────────────────────
+function StatBlock({
+  value,
+  label,
+  delay,
+  index,
+}: {
+  value: string;
+  label: string;
+  delay: number;
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const driftDir = index === 0 ? -1 : 1;
+  // Reduced drift on mobile
+  const rawX = useTransform(scrollYProgress, [0, 1], [0, typeof window !== 'undefined' && window.innerWidth < 768 ? 10 * driftDir : 24 * driftDir]);
+  const smoothX = useSpring(rawX, { stiffness: 55, damping: 16 });
+
+  return (
+    <motion.div ref={ref} style={{ x: smoothX }}>
+      <motion.h4
+        className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#004445] mb-1 sm:mb-2"
+        initial={{ opacity: 0, scale: 0.4, y: 20 }}
+        animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+        transition={{
+          type: "spring",
+          stiffness: 240,
+          damping: 16,
+          delay,
+        }}
+      >
+        {value}
+      </motion.h4>
+      <motion.p
+        className="text-[#0a1a1a]/50 uppercase tracking-widest text-xs sm:text-sm font-bold"
+        initial={{ opacity: 0, x: -12 }}
+        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.45, delay: delay + 0.15, ease: "easeOut" }}
+      >
+        {label}
+      </motion.p>
+    </motion.div>
+  );
+}
+
 // ─── Left info column ─────────────────────────────────────────────────────────
 function LeftColumn() {
   const ref = useRef<HTMLDivElement>(null);
@@ -200,7 +256,8 @@ function LeftColumn() {
     offset: ["start end", "end start"],
   });
 
-  const rawX = useTransform(scrollYProgress, [0, 1], [0, -18]);
+  // Turn off horizontal drift on mobile screens to prevent overflow layout issues
+  const rawX = useTransform(scrollYProgress, [0, 1], [0, typeof window !== 'undefined' && window.innerWidth < 1024 ? 0 : -18]);
   const smoothX = useSpring(rawX, { stiffness: 55, damping: 16 });
 
   return (
@@ -228,7 +285,7 @@ function LeftColumn() {
         {["Let's", "Build", "Together"].map((word, wi) => (
           <motion.span
             key={word}
-            className={`inline-block mr-4 ${wi === 2 ? "text-[#004445]" : ""}`}
+            className={`inline-block mr-3 sm:mr-4 ${wi === 2 ? "text-[#004445]" : ""}`}
             initial={{ opacity: 0, y: 48, rotateX: -40 }}
             animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
             transition={{
@@ -253,7 +310,7 @@ function LeftColumn() {
       />
 
       <motion.p
-        className="text-[#0a1a1a]/55 text-lg md:text-xl mb-12 font-light leading-relaxed"
+        className="text-[#0a1a1a]/55 text-base sm:text-lg md:text-xl mb-10 sm:mb-12 font-light leading-relaxed"
         initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.45 }}
@@ -265,7 +322,7 @@ function LeftColumn() {
 
       {/* Social heading */}
       <motion.h4
-        className="text-xl font-bold text-[#0a1a1a] mb-6 tracking-tight"
+        className="text-lg sm:text-xl font-bold text-[#0a1a1a] mb-5 sm:mb-6 tracking-tight"
         initial={{ opacity: 0, y: 12 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.6 }}
@@ -273,28 +330,28 @@ function LeftColumn() {
         Connect with us on
       </motion.h4>
 
-      {/* Social icons */}
-      <div className="flex gap-4 mb-14">
+      {/* Social icons - Added flex-wrap for very small devices */}
+      <div className="flex flex-wrap gap-3 sm:gap-4 mb-10 sm:mb-14">
         <SocialButton href="#" delay={0.65}>
-          <FaWhatsapp className="w-8 h-8 text-[#25D366] relative z-10" />
+          <FaWhatsapp className="w-6 h-6 sm:w-8 sm:h-8 text-[#25D366] relative z-10" />
         </SocialButton>
 
         <SocialButton href="#" delay={0.75}>
-          <FaFacebookF className="w-6 h-6 text-[#1877F2] relative z-10" />
+          <FaFacebookF className="w-5 h-5 sm:w-6 sm:h-6 text-[#1877F2] relative z-10" />
         </SocialButton>
 
         <SocialButton href="#" delay={0.85}>
-          <FaInstagram className="w-8 h-8 text-[#E1306C] relative z-10" />
+          <FaInstagram className="w-6 h-6 sm:w-8 sm:h-8 text-[#E1306C] relative z-10" />
         </SocialButton>
 
         <SocialButton href="#" delay={0.95}>
-          <FaTiktok className="w-7 h-7 text-[#000000] relative z-10" />
+          <FaTiktok className="w-5 h-5 sm:w-7 sm:h-7 text-[#000000] relative z-10" />
         </SocialButton>
       </div>
 
       {/* Email */}
       <motion.div
-        className="mb-10"
+        className="mb-8 sm:mb-10"
         initial={{ opacity: 0, y: 12 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.5, delay: 1.0 }}
@@ -305,16 +362,16 @@ function LeftColumn() {
 
         <a
           href="mailto:dewkha@gmail.com"
-          className="text-xl md:text-2xl font-bold text-[#0a1a1a] hover:text-teal-500 transition-colors inline-flex items-center gap-3"
+          className="text-lg sm:text-xl md:text-2xl font-bold text-[#0a1a1a] hover:text-teal-500 transition-colors inline-flex items-center gap-2 sm:gap-3"
         >
-          <FaEnvelope className="w-5 h-5" />
-          dewkha@gmail.com
+          <FaEnvelope className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
+          <span className="break-all">dewkha@gmail.com</span>
         </a>
       </motion.div>
 
-      {/* ─── NEW: Stacked Phone Numbers Section ─── */}
+      {/* Stacked Phone Numbers Section */}
       <motion.div
-        className="flex flex-col gap-8"
+        className="flex flex-col gap-6 sm:gap-8"
         initial={{ opacity: 0, y: 16 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 1.05 }}
@@ -324,7 +381,7 @@ function LeftColumn() {
             Sales & Inquiries
           </p>
           <p
-            className="text-2xl md:text-3xl font-black text-[#0a1a1a] group-hover:text-teal-500 transition-colors inline-block"
+            className="text-xl sm:text-2xl md:text-3xl font-black text-[#0a1a1a] group-hover:text-teal-500 transition-colors inline-block"
           >
             +94 71 160 9341
           </p>
@@ -335,8 +392,7 @@ function LeftColumn() {
             Technical Support
           </p>
           <p
-          
-            className="text-2xl md:text-3xl font-black text-[#0a1a1a] group-hover:text-teal-500 transition-colors inline-block"
+            className="text-xl sm:text-2xl md:text-3xl font-black text-[#0a1a1a] group-hover:text-teal-500 transition-colors inline-block"
           >
             +1 (555) 987-6543
           </p>
@@ -357,17 +413,18 @@ function FormPanel() {
   });
 
   // Panel parallax + rotateY sway + rotateZ tilt
-  const rawY = useTransform(scrollYProgress, [0, 1], [70, -70]);
+  const rawY = useTransform(scrollYProgress, [0, 1], [40, -40]); // Reduced for mobile
   const smoothY = useSpring(rawY, { stiffness: 65, damping: 18 });
 
-  const rawRotY = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [6, 0, 0, -6]);
+  const rawRotY = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [4, 0, 0, -4]);
   const smoothRotY = useSpring(rawRotY, { stiffness: 65, damping: 18 });
 
   const rawRotZ = useTransform(scrollYProgress, [0, 1], [1, -1]);
   const smoothRotZ = useSpring(rawRotZ, { stiffness: 50, damping: 18 });
 
-  // Mouse tilt
+  // Mouse tilt (Disabled on mobile to prevent scrolling issues)
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
     const el = panelRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -377,6 +434,7 @@ function FormPanel() {
     el.style.transform = `perspective(1100px) rotateY(${x * 10}deg) rotateX(${-y * 7}deg) scale(1.015)`;
   }
   function handleMouseLeave() {
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
     const el = panelRef.current;
     if (!el) return;
     el.style.transition = "transform 0.7s cubic-bezier(0.22,1,0.36,1)";
@@ -388,21 +446,21 @@ function FormPanel() {
   return (
     <motion.div
       ref={panelRef}
-      className="bg-white p-10 sm:p-14 rounded-[3rem] border border-[#004445]/10 shadow-sm relative overflow-hidden"
+      className="bg-white p-6 sm:p-10 md:p-14 rounded-[2rem] sm:rounded-[3rem] border border-[#004445]/10 shadow-sm relative overflow-hidden"
       style={{
         y: smoothY,
-        rotateY: smoothRotY,
-        rotateZ: smoothRotZ,
+        rotateY: typeof window !== 'undefined' && window.innerWidth >= 1024 ? smoothRotY : 0,
+        rotateZ: typeof window !== 'undefined' && window.innerWidth >= 1024 ? smoothRotZ : 0,
         transformPerspective: 1100,
       }}
-      initial={{ opacity: 0, x: 60, rotateY: 22, scale: 0.93 }}
-      animate={isInView ? { opacity: 1, x: 0, rotateY: 0, scale: 1 } : {}}
+      initial={{ opacity: 0, x: typeof window !== 'undefined' && window.innerWidth < 1024 ? 0 : 60, y: typeof window !== 'undefined' && window.innerWidth < 1024 ? 40 : 0, rotateY: typeof window !== 'undefined' && window.innerWidth < 1024 ? 0 : 22, scale: 0.95 }}
+      animate={isInView ? { opacity: 1, x: 0, y: 0, rotateY: 0, scale: 1 } : {}}
       transition={{ duration: 0.95, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
       {/* Teal shimmer top bar */}
-      <div className="absolute top-0 left-0 h-1 w-0 bg-gradient-to-r from-[#004445] to-[#4db8b8] group-hover:w-full transition-all duration-500 ease-out rounded-t-[3rem]" />
+      <div className="absolute top-0 left-0 h-1 w-0 bg-gradient-to-r from-[#004445] to-[#4db8b8] group-hover:w-full transition-all duration-500 ease-out rounded-t-[2rem] sm:rounded-t-[3rem]" />
 
       {/* Scan-line sweeps panel on entry */}
       <motion.div
@@ -419,14 +477,14 @@ function FormPanel() {
 
       {/* Ambient glow behind form */}
       <motion.div
-        className="absolute -top-20 -right-20 w-64 h-64 bg-teal-400 rounded-full mix-blend-multiply filter blur-[100px] opacity-[0.07] pointer-events-none"
+        className="absolute -top-20 -right-20 w-48 sm:w-64 h-48 sm:h-64 bg-teal-400 rounded-full mix-blend-multiply filter blur-[80px] sm:blur-[100px] opacity-[0.07] pointer-events-none"
         animate={{ scale: [1, 1.15, 1], opacity: [0.07, 0.11, 0.07] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {!submitted ? (
         <form
-          className="space-y-8"
+          className="space-y-6 sm:space-y-8"
           onSubmit={(e) => {
             e.preventDefault();
             setSubmitted(true);
@@ -456,7 +514,7 @@ function FormPanel() {
           {/* Submit button */}
           <motion.button
             type="submit"
-            className="w-full py-5 text-white bg-[#004445] hover:bg-[#003334] rounded-2xl font-bold text-lg shadow-[0_0_30px_rgba(0,68,69,0.15)] relative overflow-hidden"
+            className="w-full py-4 sm:py-5 text-white bg-[#004445] hover:bg-[#003334] rounded-2xl font-bold text-base sm:text-lg shadow-[0_0_30px_rgba(0,68,69,0.15)] relative overflow-hidden"
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
@@ -480,19 +538,19 @@ function FormPanel() {
       ) : (
         // ── Success state ──
         <motion.div
-          className="flex flex-col items-center justify-center py-16 text-center gap-6"
+          className="flex flex-col items-center justify-center py-10 sm:py-16 text-center gap-4 sm:gap-6"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 240, damping: 18 }}
         >
           <motion.div
-            className="w-20 h-20 rounded-full bg-[#004445] flex items-center justify-center shadow-[0_0_40px_rgba(0,68,69,0.3)]"
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#004445] flex items-center justify-center shadow-[0_0_40px_rgba(0,68,69,0.3)]"
             initial={{ scale: 0, rotate: -90 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ type: "spring", stiffness: 260, damping: 16, delay: 0.1 }}
           >
             <motion.svg
-              className="w-10 h-10 text-white"
+              className="w-8 h-8 sm:w-10 sm:h-10 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -513,7 +571,7 @@ function FormPanel() {
           </motion.div>
 
           <motion.h3
-            className="text-2xl font-black text-[#0a1a1a]"
+            className="text-xl sm:text-2xl font-black text-[#0a1a1a]"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
@@ -521,7 +579,7 @@ function FormPanel() {
             Message Sent!
           </motion.h3>
           <motion.p
-            className="text-[#0a1a1a]/55 font-light"
+            className="text-sm sm:text-base text-[#0a1a1a]/55 font-light"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
@@ -558,15 +616,16 @@ export function Contact() {
 
   const bgY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
 
+  // Section scale + rotateX (Reduced for mobile)
   const sectionScale = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
-    [0.96, 1, 1, 0.96]
+    [0.98, 1, 1, 0.98] 
   );
   const sectionRotX = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
-    [5, 0, 0, -5]
+    [2, 0, 0, -2]
   );
   const smoothScale = useSpring(sectionScale, { stiffness: 60, damping: 20 });
   const smoothRotX  = useSpring(sectionRotX,  { stiffness: 60, damping: 20 });
@@ -574,7 +633,8 @@ export function Contact() {
   return (
     <motion.section
       ref={sectionRef}
-      className="py-32 bg-[#f8fafa] relative overflow-hidden"
+      // Adjusted vertical padding for mobile
+      className="py-16 md:py-32 bg-[#f8fafa] relative overflow-hidden"
       style={{
         scale: smoothScale,
         rotateX: smoothRotX,
@@ -606,12 +666,13 @@ export function Contact() {
         }}
       />
 
-      {/* Ambient blobs */}
-      <div className="absolute top-1/4 -left-48 w-[460px] h-[460px] bg-teal-300 rounded-full mix-blend-multiply filter blur-[180px] opacity-[0.06] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-48 w-[400px] h-[400px] bg-teal-700 rounded-full mix-blend-multiply filter blur-[160px] opacity-[0.06] pointer-events-none" />
+      {/* Ambient blobs - responsive sizes */}
+      <div className="absolute top-1/4 -left-32 md:-left-48 w-[300px] md:w-[460px] h-[300px] md:h-[460px] bg-teal-300 rounded-full mix-blend-multiply filter blur-[120px] md:blur-[180px] opacity-[0.06] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 md:-right-48 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-teal-700 rounded-full mix-blend-multiply filter blur-[100px] md:blur-[160px] opacity-[0.06] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-20">
+        {/* Adjusted grid gap for mobile */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           <LeftColumn />
           <FormPanel />
         </div>

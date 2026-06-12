@@ -27,15 +27,16 @@ function FooterLink({
   const inner = (
     <motion.span
       ref={ref}
-      className="relative inline-block text-brand-200 hover:text-white transition-colors group/link"
-      initial={{ opacity: 0, x: -14 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
+      // Enforce text centering on mobile, left on md+
+      className="relative inline-block w-full text-center md:text-left text-white/70 hover:text-white transition-colors group/link py-1.5 md:py-1"
+      initial={{ opacity: 0, y: 10 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.42, delay, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ x: 4 }}
+      whileHover={{ x: typeof window !== 'undefined' && window.innerWidth >= 768 ? 4 : 0 }}
     >
-      {/* Teal left tick on hover */}
+      {/* Teal left tick on hover - HIDDEN ON MOBILE because hover doesn't exist and text is centered */}
       <motion.span
-        className="absolute -left-4 top-1/2 -translate-y-1/2 w-2 h-[2px] rounded-full bg-teal-500 opacity-0 group-hover/link:opacity-100"
+        className="hidden md:block absolute -left-4 top-1/2 -translate-y-1/2 w-2 h-[2px] rounded-full bg-teal-500 opacity-0 group-hover/link:opacity-100"
         initial={{ scaleX: 0 }}
         whileHover={{ scaleX: 1, opacity: 1 }}
         transition={{ duration: 0.2 }}
@@ -46,13 +47,13 @@ function FooterLink({
   );
 
   return (
-    <li>
+    <li className="w-full flex justify-center md:justify-start">
       {to ? (
-        <Link to={to} className="text-sm font-light">
+        <Link to={to} className="text-base md:text-sm font-light block w-full">
           {inner}
         </Link>
       ) : (
-        <a href={href ?? "#"} className="text-sm font-light">
+        <a href={href ?? "#"} className="text-base md:text-sm font-light block w-full">
           {inner}
         </a>
       )}
@@ -74,19 +75,20 @@ function ColHeading({
   return (
     <motion.h4
       ref={ref}
-      className="text-white font-bold mb-6 font-heading tracking-wide"
+      // Center heading on mobile
+      className="text-white font-bold mb-4 sm:mb-6 font-heading tracking-wide text-lg sm:text-base flex flex-col items-center md:items-start w-full"
       initial={{ opacity: 0, y: 16 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay, ease: "easeOut" }}
     >
       {children}
-      {/* Teal underline draws after heading */}
+      {/* Teal underline draws from center on mobile, left on desktop */}
       <motion.div
-        className="mt-2 h-[2px] bg-gradient-to-r from-teal-500/50 to-transparent rounded-full"
+        className="mt-2 h-[2px] bg-gradient-to-r from-teal-500/50 to-transparent rounded-full w-[40px] md:w-full md:max-w-none"
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 0.6, delay: delay + 0.15, ease: "easeOut" }}
-        style={{ transformOrigin: "left" }}
+        style={{ transformOrigin: typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "left" }}
       />
     </motion.h4>
   );
@@ -101,19 +103,17 @@ export function Footer() {
     offset: ["start end", "end end"],
   });
 
-  // Footer rises up as it enters from bottom
-  const rawY = useTransform(scrollYProgress, [0, 0.4], [60, 0]);
+  const rawY = useTransform(scrollYProgress, [0, 0.4], [typeof window !== 'undefined' && window.innerWidth < 768 ? 30 : 60, 0]);
   const smoothY = useSpring(rawY, { stiffness: 70, damping: 20 });
 
-  // Subtle scale
-  const rawScale = useTransform(scrollYProgress, [0, 0.4], [0.97, 1]);
+  const rawScale = useTransform(scrollYProgress, [0, 0.4], [0.98, 1]);
   const smoothScale = useSpring(rawScale, { stiffness: 70, damping: 20 });
 
-  // Parallax dot grid inside footer
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
 
   const quickLinks = [
     { to: "/",         label: "Home"       },
+    { to: "/services", label: "Services"   },
     { to: "/products", label: "Products"   },
     { to: "/machines", label: "Machines"   },
     { to: "/about",    label: "About Us"   },
@@ -130,15 +130,13 @@ export function Footer() {
   return (
     <motion.footer
       ref={footerRef}
-      className="bg-brand-950 text-brand-100 py-16 border-t border-brand-900 relative overflow-hidden"
+      className="bg-[#0a1a1a] text-[#f8fafa] py-12 lg:py-16 border-t border-white/10 relative overflow-hidden"
       style={{ y: smoothY, scale: smoothScale, transformOrigin: "bottom center" }}
     >
-      {/* Scan-line sweeps footer on entry */}
       <motion.div
         className="absolute left-0 w-full h-[2px] z-20 pointer-events-none"
         style={{
-          background:
-            "linear-gradient(90deg, transparent 0%, #2dd4bf 30%, #2dd4bf 70%, transparent 100%)",
+          background: "linear-gradient(90deg, transparent 0%, #2dd4bf 30%, #2dd4bf 70%, transparent 100%)",
           boxShadow: "0 0 12px 3px rgba(45,212,191,0.4)",
         }}
         initial={{ top: "0%", opacity: 0 }}
@@ -146,23 +144,19 @@ export function Footer() {
         transition={{ duration: 1.4, delay: 0.1, ease: "easeInOut" }}
       />
 
-      {/* Parallax dot grid */}
       <motion.div
         className="absolute inset-0 z-0 pointer-events-none opacity-30"
         style={{
           y: bgY,
-          backgroundImage:
-            "radial-gradient(circle, rgba(45,212,191,0.08) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(circle, rgba(45,212,191,0.08) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
         }}
       />
 
-      {/* Ambient teal glow — bottom left */}
       <motion.div
-        className="absolute bottom-0 left-0 w-[400px] h-[300px] rounded-full pointer-events-none"
+        className="absolute bottom-0 left-0 w-[250px] md:w-[400px] h-[200px] md:h-[300px] rounded-full pointer-events-none"
         style={{
-          background:
-            "radial-gradient(ellipse, rgba(45,212,191,0.07) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(45,212,191,0.07) 0%, transparent 70%)",
           filter: "blur(60px)",
         }}
         animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }}
@@ -170,18 +164,18 @@ export function Footer() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-8 lg:gap-12 mb-10 lg:mb-12">
 
           {/* Brand column */}
           <motion.div
-            className="md:col-span-1"
+            className="sm:col-span-2 lg:col-span-1 flex flex-col items-center md:items-start text-center md:text-left"
             initial={{ opacity: 0, y: 32 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Link to="/" className="flex items-center gap-2 mb-4 group">
+            <Link to="/" className="flex items-center gap-2 mb-4 group w-fit">
               <motion.div
-                className="text-3xl font-heading font-black text-white tracking-tighter"
+                className="text-3xl sm:text-4xl font-heading font-black text-white tracking-tighter"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300, damping: 18 }}
               >
@@ -197,7 +191,7 @@ export function Footer() {
             </Link>
 
             <motion.p
-              className="text-brand-200/70 text-sm mb-6 leading-relaxed font-light"
+              className="text-white/60 text-sm mb-6 leading-relaxed font-light max-w-sm sm:max-w-md"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -206,20 +200,19 @@ export function Footer() {
               digital ideas into the physical world.
             </motion.p>
 
-            {/* Mini teal nozzle line */}
             <motion.div
-              className="h-[2px] bg-gradient-to-r from-teal-500/60 to-transparent rounded-full"
+              className="h-[2px] bg-gradient-to-r from-teal-500/60 to-transparent rounded-full w-full max-w-[150px]"
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
-              style={{ transformOrigin: "left" }}
+              style={{ transformOrigin: typeof window !== 'undefined' && window.innerWidth < 768 ? "center" : "left" }}
             />
           </motion.div>
 
           {/* Quick links */}
-          <div>
+          <div className="flex flex-col items-center md:items-start w-full">
             <ColHeading delay={0.2}>Quick Links</ColHeading>
-            <ul className="space-y-3">
+            <ul className="space-y-3 sm:space-y-3 w-full flex flex-col items-center md:items-start">
               {quickLinks.map(({ to, label }, i) => (
                 <FooterLink key={to} to={to} delay={0.25 + i * 0.06}>
                   {label}
@@ -229,9 +222,9 @@ export function Footer() {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="flex flex-col items-center md:items-start w-full">
             <ColHeading delay={0.3}>Services</ColHeading>
-            <ul className="space-y-3">
+            <ul className="space-y-3 sm:space-y-3 w-full flex flex-col items-center md:items-start">
               {services.map((s, i) => (
                 <FooterLink key={s} href="#" delay={0.35 + i * 0.06}>
                   {s}
@@ -241,60 +234,53 @@ export function Footer() {
           </div>
 
           {/* Connect & Contact */}
-          <div>
+          <div className="flex flex-col items-center md:items-start w-full">
             <ColHeading delay={0.4}>Connect</ColHeading>
             
-            {/* Social Icons */}
             <motion.div 
-              className="flex gap-4 mb-6"
+              className="flex flex-wrap justify-center md:justify-start gap-4 mb-6"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.45 }}
             >
-              <a href="#" className="w-10 h-10 rounded-full bg-brand-900/50 border border-brand-800 flex items-center justify-center text-brand-200 hover:bg-brand-900 hover:text-[#25D366] transition-all">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-[#25D366] transition-all">
                 <FaWhatsapp className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-brand-900/50 border border-brand-800 flex items-center justify-center text-brand-200 hover:bg-brand-900 hover:text-[#1877F2] transition-all">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-[#1877F2] transition-all">
                 <FaFacebookF className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-brand-900/50 border border-brand-800 flex items-center justify-center text-brand-200 hover:bg-brand-900 hover:text-[#E1306C] transition-all">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-[#E1306C] transition-all">
                 <FaInstagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-brand-900/50 border border-brand-800 flex items-center justify-center text-brand-200 hover:bg-brand-900 hover:text-white transition-all">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white transition-all">
                 <FaTiktok className="w-4 h-4" />
               </a>
             </motion.div>
 
-            {/* Email */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.48 }}
-              className="mb-6"
+              className="mb-5 flex justify-center md:justify-start w-full"
             >
               <a
-                href="mailto:dewkha@gmail.com"
-                className="text-sm font-light text-brand-200 hover:text-teal-400 transition-colors flex items-center gap-2 group w-fit"
+                href="mailto:info@dewkha.lk"
+                className="text-base md:text-sm font-light text-white/70 hover:text-teal-400 transition-colors flex items-center gap-2 group w-fit"
               >
                 <FaEnvelope className="w-4 h-4 text-teal-500/70 group-hover:text-teal-400 transition-colors" />
-                dewkha@gmail.com
+                info@dewkha.lk
               </a>
             </motion.div>
 
-            {/* Plain Phone Numbers */}
             <motion.div
-              className="flex flex-col gap-3"
+              className="flex flex-col gap-2 w-full items-center md:items-start"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <a href="tel:+15551234567" className="text-sm font-light text-brand-200 hover:text-teal-400 transition-colors flex items-center gap-2 group w-fit">
-                <span className="text-teal-500/50 text-xs group-hover:text-teal-400 transition-colors">◆</span>
-                +1 (555) 123-4567
-              </a>
-              <a href="tel:+15559876543" className="text-sm font-light text-brand-200 hover:text-teal-400 transition-colors flex items-center gap-2 group w-fit">
-                <span className="text-teal-500/50 text-xs group-hover:text-teal-400 transition-colors">◆</span>
-                +1 (555) 987-6543
+              <a href="tel:+94779727375" className="text-base md:text-sm font-light text-white/70 hover:text-teal-400 transition-colors flex items-center gap-2 group w-fit">
+                <span className="text-teal-500/50 text-[10px] md:text-xs group-hover:text-teal-400 transition-colors">◆</span>
+                077 9727375
               </a>
             </motion.div>
           </div>
@@ -302,8 +288,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-brand-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 relative">
-          {/* Teal border draws across */}
+        <div className="border-t border-white/10 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center gap-4 relative">
           <motion.div
             className="absolute top-0 left-0 h-[1px] bg-gradient-to-r from-teal-500/40 via-teal-400/20 to-transparent rounded-full"
             initial={{ scaleX: 0 }}
@@ -313,7 +298,7 @@ export function Footer() {
           />
 
           <motion.p
-            className="text-sm text-brand-200/50 font-light text-center md:text-left"
+            className="text-xs sm:text-sm text-white/50 font-light text-center md:text-left"
             initial={{ opacity: 0, y: 10 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.75 }}
@@ -321,9 +306,8 @@ export function Footer() {
             &copy; {new Date().getFullYear()} DEWKHA. All rights reserved.
           </motion.p>
 
-          {/* Heartbeat nozzle dot */}
           <motion.div
-            className="flex items-center gap-2 text-xs text-brand-200/30 font-light"
+            className="flex items-center gap-2 text-xs text-white/30 font-light"
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.85 }}

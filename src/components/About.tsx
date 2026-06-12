@@ -4,7 +4,7 @@ import {
   useTransform,
   useSpring,
   useInView,
-} from "framer-motion"; // Note: Updated to framer-motion based on standard usage, keep as motion/react if you prefer!
+} from "motion/react";
 import { useRef } from "react";
 
 const logos = [
@@ -47,7 +47,7 @@ function StatBlock({
     <motion.div ref={ref} style={{ x: smoothX }}>
       {/* Number spring-scales in */}
       <motion.h4
-        className="text-5xl lg:text-6xl font-black text-[#004445] mb-2"
+        className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#004445] mb-2"
         initial={{ opacity: 0, scale: 0.4, y: 20 }}
         animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
         transition={{
@@ -60,7 +60,7 @@ function StatBlock({
         {value}
       </motion.h4>
       <motion.p
-        className="text-[#0a1a1a]/50 uppercase tracking-widest text-sm font-bold"
+        className="text-[#0a1a1a]/50 uppercase tracking-widest text-xs sm:text-sm font-bold"
         initial={{ opacity: 0, x: -12 }}
         animate={isInView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.45, delay: delay + 0.15, ease: "easeOut" }}
@@ -82,27 +82,28 @@ function ImagePanel() {
   });
 
   // Panel-level parallax
-  const rawY = useTransform(scrollYProgress, [0, 1], [70, -70]);
+  const rawY = useTransform(scrollYProgress, [0, 1], [30, -30]); // Reduced for mobile
   const smoothY = useSpring(rawY, { stiffness: 65, damping: 18 });
 
-  // Slow rotateY sway
-  const rawRotY = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [8, 0, 0, -8]);
+  // Slow rotateY sway (disabled on mobile via media query classes later, but kept small here)
+  const rawRotY = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [4, 0, 0, -4]); 
   const smoothRotY = useSpring(rawRotY, { stiffness: 65, damping: 18 });
 
   // Subtle rotateZ
-  const rawRotZ = useTransform(scrollYProgress, [0, 1], [1.5, -1.5]);
+  const rawRotZ = useTransform(scrollYProgress, [0, 1], [1, -1]);
   const smoothRotZ = useSpring(rawRotZ, { stiffness: 50, damping: 18 });
 
   // Image 1: faster upward parallax
-  const img1Y = useTransform(scrollYProgress, [0, 1], [30, -50]);
+  const img1Y = useTransform(scrollYProgress, [0, 1], [15, -25]); // Reduced
   const smoothImg1Y = useSpring(img1Y, { stiffness: 70, damping: 18 });
 
   // Image 2: opposite / slower
-  const img2Y = useTransform(scrollYProgress, [0, 1], [-20, 40]);
+  const img2Y = useTransform(scrollYProgress, [0, 1], [-10, 20]); // Reduced
   const smoothImg2Y = useSpring(img2Y, { stiffness: 55, damping: 18 });
 
-  // Mouse tilt
+  // Mouse tilt (Desktop only effect)
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (window.innerWidth < 1024) return; // Disable on touch/mobile
     const el = panelRef.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -112,6 +113,7 @@ function ImagePanel() {
     el.style.transform = `perspective(1100px) rotateY(${x * 12}deg) rotateX(${-y * 9}deg) scale(1.02)`;
   }
   function handleMouseLeave() {
+    if (window.innerWidth < 1024) return;
     const el = panelRef.current;
     if (!el) return;
     el.style.transition = "transform 0.7s cubic-bezier(0.22,1,0.36,1)";
@@ -121,30 +123,30 @@ function ImagePanel() {
   return (
     <motion.div
       ref={panelRef}
-      className="order-2 lg:order-1 relative"
+      className="order-2 lg:order-1 relative mt-12 lg:mt-0"
       style={{
         y: smoothY,
         rotateY: smoothRotY,
         rotateZ: smoothRotZ,
         transformPerspective: 1100,
       }}
-      initial={{ opacity: 0, x: -60, rotateY: -22, scale: 0.93 }}
+      initial={{ opacity: 0, x: -40, rotateY: -15, scale: 0.95 }}
       animate={isInView ? { opacity: 1, x: 0, rotateY: 0, scale: 1 } : {}}
       transition={{ duration: 0.95, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="grid grid-cols-2 gap-6 relative">
+      <div className="grid grid-cols-2 gap-4 sm:gap-6 relative">
         {/* Breathing glow tile */}
         <motion.div
-          className="absolute inset-0 bg-[#004445]/10 rounded-[3rem] z-0 blur-xl"
-          animate={{ rotate: [-3, -5, -3], scale: [1.05, 1.07, 1.05] }}
+          className="absolute inset-0 bg-[#004445]/10 rounded-[2rem] sm:rounded-[3rem] z-0 blur-xl"
+          animate={{ rotate: [-2, -4, -2], scale: [1.02, 1.05, 1.02] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         />
 
         {/* Counter-rotating teal ring */}
         <motion.div
-          className="absolute inset-0 rounded-[3rem] border border-teal-400/10"
+          className="absolute inset-0 rounded-[2rem] sm:rounded-[3rem] border border-teal-400/10 hidden sm:block"
           animate={{ rotate: [2, 4, 2], scale: [1.02, 1.04, 1.02] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
           style={{
@@ -155,16 +157,16 @@ function ImagePanel() {
 
         {/* Image 1 — offset downward, faster scroll */}
         <motion.div
-          className="mt-12 relative z-10"
+          className="mt-6 sm:mt-12 relative z-10"
           style={{ y: smoothImg1Y }}
-          initial={{ opacity: 0, y: 40, rotateX: 15 }}
+          initial={{ opacity: 0, y: 20, rotateX: 10 }}
           animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
           transition={{ duration: 0.85, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           whileHover={{ scale: 1.03, zIndex: 20 }}
         >
           {/* Scan-line entry */}
           <motion.div
-            className="absolute left-0 w-full h-[2px] z-20 pointer-events-none rounded-[2rem]"
+            className="absolute left-0 w-full h-[2px] z-20 pointer-events-none rounded-[1.5rem] sm:rounded-[2rem]"
             style={{
               background:
                 "linear-gradient(90deg, transparent, #2dd4bf 40%, #2dd4bf 60%, transparent)",
@@ -177,7 +179,7 @@ function ImagePanel() {
           <img
             src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800"
             alt="Workshop"
-            className="rounded-[2rem] h-64 sm:h-96 object-cover w-full shadow-lg border border-[#004445]/10"
+            className="rounded-[1.5rem] sm:rounded-[2rem] h-48 sm:h-64 lg:h-96 object-cover w-full shadow-lg border border-[#004445]/10"
           />
         </motion.div>
 
@@ -185,14 +187,14 @@ function ImagePanel() {
         <motion.div
           className="relative z-10"
           style={{ y: smoothImg2Y }}
-          initial={{ opacity: 0, y: -40, rotateX: -15 }}
+          initial={{ opacity: 0, y: -20, rotateX: -10 }}
           animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
           transition={{ duration: 0.85, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
           whileHover={{ scale: 1.03, zIndex: 20 }}
         >
           {/* Scan-line entry — delayed so it feels sequential */}
           <motion.div
-            className="absolute left-0 w-full h-[2px] z-20 pointer-events-none rounded-[2rem]"
+            className="absolute left-0 w-full h-[2px] z-20 pointer-events-none rounded-[1.5rem] sm:rounded-[2rem]"
             style={{
               background:
                 "linear-gradient(90deg, transparent, #2dd4bf 40%, #2dd4bf 60%, transparent)",
@@ -205,7 +207,7 @@ function ImagePanel() {
           <img
             src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&q=80&w=800"
             alt="Engineering"
-            className="rounded-[2rem] h-64 sm:h-96 object-cover w-full shadow-lg border border-[#004445]/10"
+            className="rounded-[1.5rem] sm:rounded-[2rem] h-48 sm:h-64 lg:h-96 object-cover w-full shadow-lg border border-[#004445]/10"
           />
         </motion.div>
       </div>
@@ -223,7 +225,7 @@ function TextColumn() {
     offset: ["start end", "end start"],
   });
 
-  // Gentle rightward drift on scroll
+  // Gentle rightward drift on scroll (disabled on mobile)
   const rawX = useTransform(scrollYProgress, [0, 1], [0, 18]);
   const smoothX = useSpring(rawX, { stiffness: 55, damping: 16 });
 
@@ -231,7 +233,7 @@ function TextColumn() {
     <motion.div
       ref={ref}
       className="order-1 lg:order-2"
-      style={{ x: smoothX }}
+      style={{ x: typeof window !== 'undefined' && window.innerWidth >= 1024 ? smoothX : 0 }}
     >
       {/* Eyebrow */}
       <motion.div
@@ -252,12 +254,12 @@ function TextColumn() {
       </motion.div>
 
       {/* Heading words fan in */}
-      <h2 className="text-4xl md:text-6xl font-heading font-black mb-8 text-[#0a1a1a] tracking-tight leading-tight">
+      <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black mb-8 text-[#0a1a1a] tracking-tight leading-tight">
         {["About", "DEWKHA"].map((word, wi) => (
           <motion.span
             key={word}
-            className={`inline-block mr-4 ${wi === 1 ? "text-[#004445]" : ""}`}
-            initial={{ opacity: 0, y: 48, rotateX: -40 }}
+            className={`inline-block mr-3 md:mr-4 ${wi === 1 ? "text-[#004445]" : ""}`}
+            initial={{ opacity: 0, y: 30, rotateX: -20 }}
             animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
             transition={{
               duration: 0.75,
@@ -287,7 +289,7 @@ function TextColumn() {
       ].map((text, i) => (
         <motion.p
           key={i}
-          className="text-[#0a1a1a]/55 text-lg md:text-xl mb-6 leading-relaxed font-light"
+          className="text-[#0a1a1a]/60 text-base sm:text-lg lg:text-xl mb-6 leading-relaxed font-medium"
           initial={{ opacity: 0, y: 18 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{
@@ -302,14 +304,14 @@ function TextColumn() {
 
       {/* Stats row */}
       <motion.div
-        className="grid grid-cols-2 gap-10 border-t border-[#004445]/10 pt-10 mt-10"
+        className="grid grid-cols-2 gap-6 sm:gap-10 border-t border-[#004445]/10 pt-8 mt-8"
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, delay: 0.7 }}
       >
         {/* Animated teal divider draws across */}
         <motion.div
-          className="col-span-2 h-[1px] bg-gradient-to-r from-teal-500/40 to-transparent -mt-10 mb-10 rounded-full"
+          className="col-span-2 h-[1px] bg-gradient-to-r from-teal-500/40 to-transparent -mt-8 mb-8 rounded-full"
           initial={{ scaleX: 0 }}
           animate={isInView ? { scaleX: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.75, ease: "easeOut" }}
@@ -333,13 +335,13 @@ function PartnersMarquee() {
   });
 
   // Strip lifts gently as you scroll
-  const rawY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const rawY = useTransform(scrollYProgress, [0, 1], [20, -20]);
   const smoothY = useSpring(rawY, { stiffness: 60, damping: 18 });
 
   return (
     <motion.div
       ref={ref}
-      className="pt-20 pb-20 border-t border-[#004445]/10 bg-[#eaf3f3]/40 relative overflow-hidden"
+      className="pt-16 pb-16 lg:pt-20 lg:pb-20 border-t border-[#004445]/10 bg-[#eaf3f3]/40 relative overflow-hidden"
       style={{ y: smoothY }}
       initial={{ opacity: 0, y: 40 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -359,9 +361,9 @@ function PartnersMarquee() {
       />
 
       {/* Heading */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 lg:mb-12 text-center">
         <motion.p
-          className="text-sm font-bold tracking-widest text-[#004445] uppercase mb-3"
+          className="text-xs sm:text-sm font-bold tracking-widest text-[#004445] uppercase mb-3"
           initial={{ opacity: 0, y: -12 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -369,7 +371,7 @@ function PartnersMarquee() {
           Trusted by industry leaders
         </motion.p>
         <motion.h3
-          className="text-3xl font-heading font-bold text-[#0a1a1a]"
+          className="text-2xl sm:text-3xl font-heading font-bold text-[#0a1a1a]"
           initial={{ opacity: 0, y: 16, rotateX: -20 }}
           animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
           transition={{ duration: 0.65, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -388,29 +390,29 @@ function PartnersMarquee() {
       </div>
 
       {/* Scrolling logo strip */}
-      <div className="relative flex overflow-hidden py-8">
+      <div className="relative flex overflow-hidden py-6 lg:py-8">
         {/* Edge fades */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-[#eaf3f3] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-[#eaf3f3] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 md:w-64 bg-gradient-to-r from-[#f5f9f9] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 md:w-64 bg-gradient-to-l from-[#f5f9f9] to-transparent z-10 pointer-events-none" />
 
         {/* Main marquee — left */}
         <motion.div
           className="flex whitespace-nowrap"
           animate={{ x: [0, -2000] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 28 }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
         >
           {[...logos, ...logos, ...logos].map((logo, index) => (
             <motion.div
               key={index}
-              className="px-8 sm:px-16 flex items-center justify-center text-2xl md:text-3xl font-heading font-black text-[#004445]/20 hover:text-[#004445]/55 transition-colors cursor-default select-none"
+              className="px-6 sm:px-10 lg:px-16 flex items-center justify-center text-xl sm:text-2xl md:text-3xl font-heading font-black text-[#004445]/20 hover:text-[#004445]/55 transition-colors cursor-default select-none"
               whileHover={{
-                scale: 1.12,
+                scale: 1.05,
                 color: "rgba(0,68,69,0.6)",
               }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
               {/* Dot separator */}
-              <span className="mr-8 sm:mr-16 text-teal-400/30 text-base">◆</span>
+              <span className="mr-6 sm:mr-10 lg:mr-16 text-teal-400/30 text-xs sm:text-base">◆</span>
               {logo}
             </motion.div>
           ))}
@@ -418,23 +420,23 @@ function PartnersMarquee() {
       </div>
 
       {/* Second row — slower, opposite direction */}
-      <div className="relative flex overflow-hidden py-4 mt-2">
-        <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-[#eaf3f3] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-[#eaf3f3] to-transparent z-10 pointer-events-none" />
+      <div className="relative flex overflow-hidden py-3 lg:py-4 mt-1 lg:mt-2">
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 md:w-64 bg-gradient-to-r from-[#f5f9f9] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 md:w-64 bg-gradient-to-l from-[#f5f9f9] to-transparent z-10 pointer-events-none" />
 
         <motion.div
           className="flex whitespace-nowrap"
           animate={{ x: [-2000, 0] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 36 }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 45 }}
         >
           {[...logos, ...logos, ...logos].map((logo, index) => (
             <motion.div
               key={index}
-              className="px-8 sm:px-16 flex items-center justify-center text-xl md:text-2xl font-heading font-black text-[#004445]/12 hover:text-[#004445]/35 transition-colors cursor-default select-none"
-              whileHover={{ scale: 1.1 }}
+              className="px-6 sm:px-10 lg:px-16 flex items-center justify-center text-lg sm:text-xl md:text-2xl font-heading font-black text-[#004445]/10 hover:text-[#004445]/35 transition-colors cursor-default select-none"
+              whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <span className="mr-8 sm:mr-16 text-teal-400/20 text-sm">◆</span>
+              <span className="mr-6 sm:mr-10 lg:mr-16 text-teal-400/20 text-xs sm:text-sm">◆</span>
               {logo}
             </motion.div>
           ))}
@@ -455,18 +457,18 @@ export function About() {
   });
 
   // Parallax dot grid
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
 
   // Section scale + rotateX
   const sectionScale = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
-    [0.96, 1, 1, 0.96]
+    [0.98, 1, 1, 0.98] // Reduced scale variance for mobile
   );
   const sectionRotX = useTransform(
     scrollYProgress,
     [0, 0.15, 0.85, 1],
-    [5, 0, 0, -5]
+    [2, 0, 0, -2] // Reduced rotation for mobile
   );
   const smoothScale = useSpring(sectionScale, { stiffness: 60, damping: 20 });
   const smoothRotX = useSpring(sectionRotX, { stiffness: 60, damping: 20 });
@@ -474,8 +476,7 @@ export function About() {
   return (
     <motion.section
       ref={sectionRef}
-      // CHANGED: Reduced pt-32 to pt-8 here
-      className="pt-8 pb-0 bg-[#f8fafa] relative overflow-hidden border-b border-[#004445]/10"
+      className="pt-16 lg:pt-8 pb-0 bg-[#f8fafa] relative overflow-hidden border-b border-[#004445]/10"
       style={{
         scale: smoothScale,
         rotateX: smoothRotX,
@@ -508,13 +509,13 @@ export function About() {
       />
 
       {/* Ambient blobs */}
-      <div className="absolute top-1/4 -left-48 w-[460px] h-[460px] bg-teal-300 rounded-full mix-blend-multiply filter blur-[180px] opacity-[0.06] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-48 w-[400px] h-[400px] bg-teal-700 rounded-full mix-blend-multiply filter blur-[160px] opacity-[0.06] pointer-events-none" />
+      <div className="absolute top-1/4 -left-48 w-[300px] lg:w-[460px] h-[300px] lg:h-[460px] bg-teal-300 rounded-full mix-blend-multiply filter blur-[120px] lg:blur-[180px] opacity-[0.06] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-48 w-[250px] lg:w-[400px] h-[250px] lg:h-[400px] bg-teal-700 rounded-full mix-blend-multiply filter blur-[100px] lg:blur-[160px] opacity-[0.06] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-32">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <ImagePanel />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-20 lg:mb-32">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <TextColumn />
+          <ImagePanel />
         </div>
       </div>
 

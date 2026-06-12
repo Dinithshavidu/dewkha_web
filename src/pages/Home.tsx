@@ -5,11 +5,14 @@ import { FeaturedProducts } from "../components/FeaturedProducts";
 import { Machines } from "../components/Machines";
 import { About } from "../components/About";
 import { Contact } from "../components/Contact";
+import { HomeServices } from "../components/HomeServices";
 import { Customization } from "../components/Customization";
 
 export function Home() {
   return (
-    <div className="animate-in fade-in duration-700">
+    // REMOVED 'overflow-x-hidden' to fix the double vertical scrollbar bug.
+    // Added 'w-full flex flex-col' to ensure it stretches safely inside App.tsx.
+    <div className="animate-in fade-in duration-700 w-full flex flex-col">
 
       {/* SEO META TAGS */}
       <Header
@@ -20,9 +23,10 @@ export function Home() {
 
       {/* PAGE CONTENT */}
       <Hero />
+      <HomeServices />
       <FeaturedProducts />
       <Machines />
-      <Customization />
+      <Customization/>
       <About />
       <Contact />
 

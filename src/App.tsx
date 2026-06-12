@@ -5,6 +5,7 @@ import { ProductsPage } from "./pages/ProductsPage";
 import { MachinesPage } from "./pages/MachinesPage";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
+import { ServicesPage } from "./pages/ServicesPage"; // <-- Added Import
 import { Footer } from "./components/Footer";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { MachineDetailsPage } from "./pages/MachineDetailsPage";
@@ -20,6 +21,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/machines" element={<MachinesPage />} />
+            <Route path="/services" element={<ServicesPage />} /> 
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/machine/:machineId" element={<MachineDetailsPage />} />

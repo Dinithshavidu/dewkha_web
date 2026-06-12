@@ -1,4 +1,3 @@
-// ─── Navbar ───────────────────────────────────────────────────────────────────
 import { Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -23,11 +22,24 @@ export function Navbar() {
     return unsub;
   }, [scrollY]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   const isActive = (path: string) => location.pathname === path;
 
   // Nav links config
   const links = [
     { to: "/",        label: "Home"     },
+    { to: "/services",label: "Services" },
     { to: "/products",label: "Products" },
     { to: "/machines",label: "Machines" },
     { to: "/about",   label: "About Us" },
@@ -35,9 +47,9 @@ export function Navbar() {
 
   return (
     <motion.nav
-      className="fixed top-0 w-full z-50 backdrop-blur-xl border-b border-[#004445]/10 transition-colors duration-300"
+      className="fixed top-0 left-0 right-0 z-[100] backdrop-blur-xl border-b border-[#004445]/10 transition-colors duration-300"
       style={{
-        backgroundColor: scrolled ? "rgba(232,244,240,0.97)" : "rgba(232,244,240,0.80)",
+        backgroundColor: scrolled ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.80)",
         boxShadow: scrolled ? "0 4px 32px rgba(0,68,69,0.08)" : "none",
       }}
       // Slide down on mount
@@ -47,7 +59,7 @@ export function Navbar() {
     >
       {/* Top teal accent line — draws across on mount */}
       <motion.div
-        className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-[#004445] via-teal-400 to-transparent"
+        className="absolute top-0 left-0 h-[3px] bg-gradient-to-r from-[#004445] via-teal-400 to-transparent z-50"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
@@ -60,14 +72,14 @@ export function Navbar() {
           animate={{ height: scrolled ? 72 : 96 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
         >
-          {/* Logo */}
+          {/* Logo - Restored to exact original settings */}
           <motion.div
-            className="flex-shrink-0 flex items-center"
+            className="flex-shrink-0 flex items-center z-50"
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Link to="/" className="flex items-center group">
+            <Link to="/" className="flex items-center group" onClick={() => setIsOpen(false)}>
               <motion.img
                 src="/Dewkha-logo.png"
                 alt="DEWKHA Logo"
@@ -80,7 +92,7 @@ export function Navbar() {
           </motion.div>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden lg:flex items-center space-x-10">
             {links.map(({ to, label }, i) => (
               <NavLink
                 key={to}
@@ -124,14 +136,14 @@ export function Navbar() {
 
           {/* Mobile hamburger */}
           <motion.div
-            className="md:hidden flex items-center"
+            className="lg:hidden flex items-center z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-[#004445] focus:outline-none"
+              className="text-[#004445] p-2 focus:outline-none bg-teal-50/50 rounded-full hover:bg-teal-100 transition-colors"
               whileTap={{ scale: 0.88 }}
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -142,8 +154,9 @@ export function Navbar() {
                     animate={{ rotate: 0, opacity: 1 }}
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.22 }}
+                    className="block"
                   >
-                    <X className="h-8 w-8" />
+                    <X className="h-7 w-7" />
                   </motion.span>
                 ) : (
                   <motion.span
@@ -152,8 +165,9 @@ export function Navbar() {
                     animate={{ rotate: 0, opacity: 1 }}
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.22 }}
+                    className="block"
                   >
-                    <Menu className="h-8 w-8" />
+                    <Menu className="h-7 w-7" />
                   </motion.span>
                 )}
               </AnimatePresence>
@@ -166,7 +180,7 @@ export function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden bg-[#e8f4f0] border-b border-[#004445]/10 absolute w-full shadow-2xl overflow-hidden"
+            className="lg:hidden bg-white/95 backdrop-blur-2xl border-b border-[#004445]/10 absolute left-0 right-0 shadow-[0_20px_40px_rgba(0,68,69,0.1)] overflow-hidden origin-top"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -185,7 +199,8 @@ export function Navbar() {
               transition={{ duration: 0.7, ease: "easeInOut" }}
             />
 
-            <div className="px-4 pt-4 pb-8 space-y-2">
+            {/* Mobile Nav Links Container */}
+            <div className="px-6 pt-6 pb-10 space-y-2">
               {links.map(({ to, label }, i) => (
                 <motion.div
                   key={to}
@@ -194,17 +209,17 @@ export function Navbar() {
                   exit={{ opacity: 0, x: -16 }}
                   transition={{
                     duration: 0.32,
-                    delay: i * 0.06,
+                    delay: i * 0.05,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                 >
                   <Link
                     to={to}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-4 text-base font-bold rounded-2xl transition-colors ${
+                    className={`block px-5 py-4 text-lg font-bold rounded-2xl transition-colors ${
                       isActive(to)
                         ? "bg-[#004445]/10 text-[#004445]"
-                        : "text-[#004445]/50 hover:bg-[#004445]/10 hover:text-[#004445]"
+                        : "text-[#004445]/60 hover:bg-[#004445]/5 hover:text-[#004445]"
                     }`}
                   >
                     {label}
@@ -216,12 +231,13 @@ export function Navbar() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.32, delay: links.length * 0.06 }}
+                transition={{ duration: 0.32, delay: links.length * 0.05 }}
+                className="pt-4"
               >
                 <Link
                   to="/contact"
                   onClick={() => setIsOpen(false)}
-                  className="block px-4 py-4 text-base font-black text-white bg-[#004445] rounded-2xl text-center mt-4 relative overflow-hidden"
+                  className="block w-full px-4 py-5 text-lg font-black text-white bg-[#004445] rounded-2xl text-center shadow-lg active:scale-95 transition-transform"
                 >
                   Contact Us
                 </Link>
@@ -234,7 +250,7 @@ export function Navbar() {
   );
 }
 
-// ─── Individual nav link with animated underline indicator ───────────────────
+// ─── Individual nav link with animated underline indicator (Desktop) ───────────
 function NavLink({
   to,
   label,
@@ -269,7 +285,7 @@ function NavLink({
       {/* Active dot */}
       {active && (
         <motion.span
-          className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-teal-500"
+          className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-teal-500 shadow-[0_0_8px_rgba(20,184,166,0.8)]"
           layoutId="nav-dot"
           transition={{ type: "spring", stiffness: 300, damping: 24 }}
         />
@@ -277,7 +293,7 @@ function NavLink({
 
       {/* Hover underline draws left→right */}
       <motion.span
-        className="absolute -bottom-1 left-0 h-[2px] rounded-full bg-gradient-to-r from-[#004445] to-teal-400"
+        className="absolute -bottom-1.5 left-0 h-[2px] rounded-full bg-gradient-to-r from-[#004445] to-teal-400"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: hovered && !active ? 1 : 0 }}
         transition={{ duration: 0.25, ease: "easeOut" }}

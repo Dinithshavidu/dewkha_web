@@ -13,7 +13,7 @@ export function ContactPage() {
   // Parallax dot grid drifts upward as you scroll
   const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
 
-  // Hero text parallaxes up slower than scroll
+  // Hero text parallaxes up slower than scroll (subtle reduction on mobile not needed since it's short)
   const heroY = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const smoothHeroY = useSpring(heroY, { stiffness: 60, damping: 18 });
 
@@ -36,20 +36,21 @@ export function ContactPage() {
         }}
       />
 
-      {/* ── Ambient blobs ── */}
-      <div className="fixed top-1/4 -left-48 w-[460px] h-[460px] bg-teal-300 rounded-full mix-blend-multiply filter blur-[180px] opacity-[0.07] pointer-events-none z-0" />
-      <div className="fixed bottom-1/4 -right-48 w-[400px] h-[400px] bg-teal-700 rounded-full mix-blend-multiply filter blur-[160px] opacity-[0.07] pointer-events-none z-0" />
+      {/* ── Ambient blobs (Scaled down for mobile screens) ── */}
+      <div className="fixed top-1/4 -left-32 md:-left-48 w-[250px] md:w-[460px] h-[250px] md:h-[460px] bg-teal-300 rounded-full mix-blend-multiply filter blur-[100px] md:blur-[180px] opacity-[0.07] pointer-events-none z-0" />
+      <div className="fixed bottom-1/4 -right-32 md:-right-48 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-teal-700 rounded-full mix-blend-multiply filter blur-[90px] md:blur-[160px] opacity-[0.07] pointer-events-none z-0" />
 
       {/* ── Hero header ── */}
       <motion.div
-        className="relative z-10 pt-40 pb-20 px-4"
+        // Adjusted padding for mobile
+        className="relative z-10 pt-28 sm:pt-32 md:pt-40 pb-12 md:pb-20 px-4 sm:px-6"
         style={{ y: smoothHeroY, opacity: heroOpacity }}
       >
         <div className="max-w-7xl mx-auto">
 
           {/* Eyebrow */}
           <motion.div
-            className="inline-flex items-center gap-3 mb-6"
+            className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
@@ -57,16 +58,16 @@ export function ContactPage() {
             <motion.span
               className="h-[2px] bg-teal-500 block"
               initial={{ width: 0 }}
-              animate={{ width: 32 }}
+              animate={{ width: 28 }}
               transition={{ duration: 0.7, delay: 0.25 }}
             />
-            <span className="text-teal-700 text-xs font-bold tracking-widest uppercase">
+            <span className="text-teal-700 text-[10px] sm:text-xs font-bold tracking-widest uppercase">
               We'd love to hear from you
             </span>
           </motion.div>
 
           {/* Heading — words fan in with rotateX */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-black text-[#0a1a1a] tracking-tight leading-[1.05] mb-6">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-black text-[#0a1a1a] tracking-tight leading-[1.1] md:leading-[1.05] mb-4 sm:mb-6">
             {[
               { text: "Get",     accent: false },
               { text: "in",      accent: false },
@@ -74,7 +75,8 @@ export function ContactPage() {
             ].map((word, wi) => (
               <motion.span
                 key={wi}
-                className={`inline-block mr-5 ${word.accent ? "text-[#004445]" : ""}`}
+                // Adjusted right margin for mobile wrapping
+                className={`inline-block mr-3 sm:mr-4 md:mr-5 ${word.accent ? "text-[#004445]" : ""}`}
                 initial={{ opacity: 0, y: 56, rotateX: -45 }}
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 transition={{
@@ -91,16 +93,17 @@ export function ContactPage() {
 
           {/* Laser underline draws left → right */}
           <motion.div
-            className="h-[3px] bg-gradient-to-r from-teal-500 via-teal-300 to-transparent rounded-full mb-8"
+            // Added percentage width for mobile, capped at 420px
+            className="h-[2px] sm:h-[3px] bg-gradient-to-r from-teal-500 via-teal-300 to-transparent rounded-full mb-6 sm:mb-8"
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 1.1, delay: 0.6, ease: "easeOut" }}
-            style={{ transformOrigin: "left", maxWidth: "420px" }}
+            style={{ transformOrigin: "left", width: "80%", maxWidth: "420px" }}
           />
 
           {/* Subtitle */}
           <motion.p
-            className="text-[#0a1a1a]/50 text-lg md:text-xl font-light leading-relaxed max-w-xl"
+            className="text-[#0a1a1a]/55 text-base sm:text-lg md:text-xl font-medium sm:font-light leading-relaxed max-w-[95%] sm:max-w-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.55, ease: "easeOut" }}
@@ -111,23 +114,23 @@ export function ContactPage() {
 
           {/* Scroll hint */}
           <motion.div
-            className="mt-12 flex items-center gap-3"
+            className="mt-10 sm:mt-12 flex items-center gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1, duration: 0.7 }}
           >
-            <span className="text-xs font-bold tracking-widest uppercase text-[#004445]/35">
+            <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase text-[#004445]/35">
               Scroll
             </span>
             <motion.div
-              className="w-[1px] h-7 bg-gradient-to-b from-teal-500 to-transparent"
+              className="w-[1px] h-5 sm:h-7 bg-gradient-to-b from-teal-500 to-transparent"
               animate={{ scaleY: [0, 1, 0], originY: "top" }}
               transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
             />
           </motion.div>
         </div>
 
-        {/* Floating stat chips */}
+        {/* Floating stat chips - Safe because hidden below xl screens */}
         <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-5">
           {[
             { value: "< 24h",   label: "Response time" },
