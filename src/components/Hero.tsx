@@ -311,7 +311,7 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
           >
-            & Laser Cutting
+            & Laser Engraving
           </motion.span>
         </motion.h1>
 
@@ -348,16 +348,16 @@ export function Hero() {
             Our Services
           </Link>
           <Link
-            to="/products"
+            to="/machines"
             className="inline-flex justify-center items-center px-12 py-5 text-lg font-black rounded-full text-[#0a1a1a] bg-transparent border-2 border-teal-600 hover:bg-teal-600/10 transition-all transform hover:scale-105 hover:-translate-y-1"
           >
-            Buy Products
+            Buy Machines
           </Link>
           <Link
-            to="/machines"
+            to="/products"
             className="inline-flex justify-center items-center px-12 py-5 text-lg font-black rounded-full text-teal-900 bg-teal-100 hover:bg-teal-200 transition-all transform hover:scale-105 hover:-translate-y-1"
           >
-            Buy Machines
+            Buy Products
           </Link>
         </motion.div>
 

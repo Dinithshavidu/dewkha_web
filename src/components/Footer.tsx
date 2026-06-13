@@ -243,16 +243,16 @@ export function Footer() {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.45 }}
             >
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-[#25D366] transition-all">
+              <a href="https://wa.me/94711332442" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-[#25D366] transition-all">
                 <FaWhatsapp className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-[#1877F2] transition-all">
+              <a href="https://www.facebook.com/yourpage" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-[#1877F2] transition-all">
                 <FaFacebookF className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-[#E1306C] transition-all">
+              <a href="https://www.instagram.com/yourusername" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-[#E1306C] transition-all">
                 <FaInstagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white transition-all">
+              <a href="https://www.tiktok.com/@yourusername" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:bg-white/10 hover:text-white transition-all">
                 <FaTiktok className="w-4 h-4" />
               </a>
             </motion.div>
@@ -268,7 +268,7 @@ export function Footer() {
                 className="text-base md:text-sm font-light text-white/70 hover:text-teal-400 transition-colors flex items-center gap-2 group w-fit"
               >
                 <FaEnvelope className="w-4 h-4 text-teal-500/70 group-hover:text-teal-400 transition-colors" />
-                info@dewkha.lk
+                dewkha.creation@gmail.com
               </a>
             </motion.div>
 
@@ -280,7 +280,7 @@ export function Footer() {
             >
               <a href="tel:+94779727375" className="text-base md:text-sm font-light text-white/70 hover:text-teal-400 transition-colors flex items-center gap-2 group w-fit">
                 <span className="text-teal-500/50 text-[10px] md:text-xs group-hover:text-teal-400 transition-colors">◆</span>
-                077 9727375
+                +94 71 133 2442
               </a>
             </motion.div>
           </div>

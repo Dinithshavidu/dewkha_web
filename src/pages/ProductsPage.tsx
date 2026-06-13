@@ -429,7 +429,8 @@ export function ProductsPage() {
               >
                 <Search className="w-10 h-10 sm:w-12 sm:h-12 mb-4 opacity-20" />
                 <p className="text-base sm:text-lg font-medium">No products found.</p>
-                <p className="text-xs sm:text-sm opacity-70">Try adjusting your search or category filter.</p>
+                <p className="text-xs sm:text-sm opacity-70">We're currently adding products to this category.
+                Check back soon for exciting new arrivals!</p>
               </motion.div>
             )}
           </motion.div>

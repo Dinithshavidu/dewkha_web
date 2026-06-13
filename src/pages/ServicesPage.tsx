@@ -17,13 +17,7 @@ import {
   HeartHandshake,
   ShieldCheck
 } from "lucide-react";
-
-// Inline WhatsApp SVG for cleaner icon representation
-const WhatsAppIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-  </svg>
-);
+import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 
 // ─── Reusable 3D Tilt Card ──────────────────────────────────────────────────
 function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -120,10 +114,10 @@ export function ServicesPage() {
           className="mb-20 md:mb-32 text-center"
         >
           <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl md:text-7xl font-black text-[#0a1a1a] tracking-tight mb-4 sm:mb-6">
-            Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#004445] to-teal-500">3D Printing</span>
+            Professional <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#004445] to-teal-500">3D Printing & Laser Engraving</span>
           </motion.h1>
           <motion.p variants={fadeUp} className="text-base sm:text-lg md:text-xl text-[#0a1a1a]/60 max-w-2xl mx-auto mb-12 sm:mb-20 leading-relaxed px-2">
-            We make sure to provide you the best 3D printing service ensuring top-tier print quality. We manually inspect your 3D model to provide you the best price by calculating material cost and print time.
+            We make sure to provide you the best 3D printing & Laser Engraving service ensuring top-tier print quality. We manually inspect your model to provide you the best price by calculating material cost and print time.
           </motion.p>
 
           {/* Large Contact Circles Row */}
@@ -132,33 +126,35 @@ export function ServicesPage() {
             {/* WhatsApp Large Card */}
             <motion.a 
               variants={fadeUp}
-              href="https://wa.me/0779727375"
+              href="https://wa.me/0711332442"
               target="_blank"
               rel="noreferrer"
-              className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-10 w-full max-w-sm flex flex-col items-center shadow-lg hover:shadow-2xl border border-[#004445]/5 hover:border-teal-400/30 transition-all duration-500 group transform hover:-translate-y-2"
+              className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-10 w-full max-w-sm flex flex-col items-center shadow-lg hover:shadow-2xl border border-[#004445]/5 hover:border-[#25D366]/30 transition-all duration-500 group transform hover:-translate-y-2"
             >
-              <div className="w-24 h-24 sm:w-32 sm:h-32 bg-[#77b243] rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-inner relative overflow-hidden shrink-0">
-                <WhatsAppIcon className="w-12 h-12 sm:w-16 sm:h-16 text-white relative z-10 drop-shadow-md" />
+              {/* Normal Dark Teal -> Real WhatsApp Green */}
+              <div className="w-24 h-24 sm:w-32 sm:h-32 bg-[#1A5C5D] group-hover:bg-[#25D366] transition-colors duration-500 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-inner relative overflow-hidden shrink-0">
+                <FaWhatsapp className="w-12 h-12 sm:w-16 sm:h-16 text-white relative z-10 drop-shadow-md" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent pointer-events-none" />
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-[#0a1a1a] mb-1 sm:mb-2">WhatsApp</h3>
-              <p className="text-xl sm:text-3xl font-bold text-[#0a1a1a]/60 mb-4 sm:mb-6">077 9727375</p>
-              <span className="text-xs sm:text-sm font-bold text-[#77b243] group-hover:underline">Click to send files</span>
+              <p className="text-xl sm:text-3xl font-bold text-[#0a1a1a]/60 group-hover:text-[#0a1a1a] transition-colors duration-500 mb-4 sm:mb-6">071 1332442</p>
+              <span className="text-xs sm:text-sm font-bold text-[#1A5C5D] group-hover:text-[#25D366] transition-colors duration-500 group-hover:underline">Click to send files</span>
             </motion.a>
 
             {/* Email Large Card */}
             <motion.a 
               variants={fadeUp}
-              href="mailto:info@dewkha.lk"
-              className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-10 w-full max-w-sm flex flex-col items-center shadow-lg hover:shadow-2xl border border-[#004445]/5 hover:border-blue-400/30 transition-all duration-500 group transform hover:-translate-y-2"
+              href="mailto:dewkha.creation@gmail.com"
+              className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-10 w-full max-w-sm flex flex-col items-center shadow-lg hover:shadow-2xl border border-[#004445]/5 hover:border-[#3B82F6]/30 transition-all duration-500 group transform hover:-translate-y-2"
             >
-              <div className="w-24 h-24 sm:w-32 sm:h-32 bg-[#3672b1] rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-inner relative overflow-hidden shrink-0">
-                <Mail className="w-12 h-12 sm:w-16 sm:h-16 text-white relative z-10 drop-shadow-md" />
+              {/* Normal Dark Teal -> Standard Email Blue */}
+              <div className="w-24 h-24 sm:w-32 sm:h-32 bg-[#1A5C5D] group-hover:bg-[#3B82F6] transition-colors duration-500 rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-inner relative overflow-hidden shrink-0">
+                <FaEnvelope className="w-10 h-10 sm:w-14 sm:h-14 text-white relative z-10 drop-shadow-md" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent pointer-events-none" />
               </div>
               <h3 className="text-xl sm:text-2xl font-black text-[#0a1a1a] mb-1 sm:mb-2">eMail</h3>
-              <p className="text-lg sm:text-2xl font-bold text-[#3672b1] mb-4 sm:mb-6">info@dewkha.lk</p>
-              <span className="text-xs sm:text-sm font-bold text-[#3672b1] group-hover:underline">Click to email</span>
+              <p className="text-lg sm:text-2xl font-bold text-[#0a1a1a]/60 group-hover:text-[#0a1a1a] transition-colors duration-500 mb-4 sm:mb-6">dewkha.creation@gmail.com</p>
+              <span className="text-xs sm:text-sm font-bold text-[#1A5C5D] group-hover:text-[#3B82F6] transition-colors duration-500 group-hover:underline">Click to email</span>
             </motion.a>
 
           </div>
@@ -217,10 +213,12 @@ export function ServicesPage() {
               <TiltCard key={i} className="h-full">
                 <motion.div variants={fadeUp} className="bg-white rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 border border-[#004445]/10 hover:border-teal-400/50 shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col group">
                   <div className="flex items-center justify-between mb-6 sm:mb-8">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-[#f8fafa] border border-[#004445]/5 flex items-center justify-center text-[#2768ff] group-hover:bg-[#2768ff] group-hover:text-white group-hover:scale-110 transition-all duration-500 shadow-sm">
+                    {/* Changed from Blue to Teal */}
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-[#f8fafa] border border-[#004445]/5 flex items-center justify-center text-teal-600 group-hover:bg-teal-500 group-hover:text-white group-hover:scale-110 transition-all duration-500 shadow-sm">
                       {step.icon}
                     </div>
-                    <span className="text-5xl sm:text-6xl font-black text-[#0a1a1a]/5 group-hover:text-[#2768ff]/10 transition-colors duration-500">
+                    {/* Changed hover shadow text from Blue to Teal */}
+                    <span className="text-5xl sm:text-6xl font-black text-[#0a1a1a]/5 group-hover:text-teal-500/15 transition-colors duration-500">
                       {step.num}
                     </span>
                   </div>
@@ -301,7 +299,7 @@ export function ServicesPage() {
                   <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white/80 rounded-sm flex items-center justify-center">
                     <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white/80" />
                   </div>
-                  <span className="text-white/90 font-bold text-[10px] sm:text-xs tracking-widest">DEWKHA 3D</span>
+                  <span className="text-white/90 font-bold text-[10px] sm:text-xs tracking-widest">DEWKHA</span>
                 </div>
               </motion.div>
             ))}

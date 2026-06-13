@@ -146,6 +146,7 @@ function FormField({
         {textarea ? (
           <textarea
             id={id}
+            name={id}
             rows={4}
             className={inputClass + " resize-none"}
             placeholder={placeholder}
@@ -159,6 +160,7 @@ function FormField({
           <input
             type={type}
             id={id}
+            name={id}
             className={inputClass}
             placeholder={placeholder}
             onFocus={() => setFocused(true)}
@@ -332,19 +334,19 @@ function LeftColumn() {
 
       {/* Social icons - Added flex-wrap for very small devices */}
       <div className="flex flex-wrap gap-3 sm:gap-4 mb-10 sm:mb-14">
-        <SocialButton href="#" delay={0.65}>
+        <SocialButton href="https://wa.me/94711332442" delay={0.65}>
           <FaWhatsapp className="w-6 h-6 sm:w-8 sm:h-8 text-[#25D366] relative z-10" />
         </SocialButton>
 
-        <SocialButton href="#" delay={0.75}>
+        <SocialButton href="https://www.facebook.com/yourpage" delay={0.75}>
           <FaFacebookF className="w-5 h-5 sm:w-6 sm:h-6 text-[#1877F2] relative z-10" />
         </SocialButton>
 
-        <SocialButton href="#" delay={0.85}>
+        <SocialButton href="https://www.instagram.com/yourusername" delay={0.85}>
           <FaInstagram className="w-6 h-6 sm:w-8 sm:h-8 text-[#E1306C] relative z-10" />
         </SocialButton>
 
-        <SocialButton href="#" delay={0.95}>
+        <SocialButton href="https://www.tiktok.com/@yourusername" delay={0.95}>
           <FaTiktok className="w-5 h-5 sm:w-7 sm:h-7 text-[#000000] relative z-10" />
         </SocialButton>
       </div>
@@ -361,11 +363,11 @@ function LeftColumn() {
         </p>
 
         <a
-          href="mailto:dewkha@gmail.com"
+          href="mailto:dewkha.creation@gmail.com"
           className="text-lg sm:text-xl md:text-2xl font-bold text-[#0a1a1a] hover:text-teal-500 transition-colors inline-flex items-center gap-2 sm:gap-3"
         >
           <FaEnvelope className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-          <span className="break-all">dewkha@gmail.com</span>
+          <span className="break-all">dewkha.creation@gmail.com</span>
         </a>
       </motion.div>
 
@@ -378,23 +380,12 @@ function LeftColumn() {
       >
         <div className="group">
           <p className="text-xs font-bold tracking-widest text-[#004445]/60 uppercase mb-2 group-hover:text-[#004445] transition-colors">
-            Sales & Inquiries
+            CONTACT US
           </p>
           <p
             className="text-xl sm:text-2xl md:text-3xl font-black text-[#0a1a1a] group-hover:text-teal-500 transition-colors inline-block"
           >
-            +94 71 160 9341
-          </p>
-        </div>
-        
-        <div className="group">
-          <p className="text-xs font-bold tracking-widest text-[#004445]/60 uppercase mb-2 group-hover:text-[#004445] transition-colors">
-            Technical Support
-          </p>
-          <p
-            className="text-xl sm:text-2xl md:text-3xl font-black text-[#0a1a1a] group-hover:text-teal-500 transition-colors inline-block"
-          >
-            +1 (555) 987-6543
+            +94 71 133 2442
           </p>
         </div>
       </motion.div>
@@ -442,6 +433,37 @@ function FormPanel() {
   }
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Handle Formspree submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xgobpzeq", {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        alert("Oops! There was a problem submitting your form");
+      }
+    } catch (error) {
+      alert("Oops! There was a problem submitting your form");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <motion.div
@@ -485,10 +507,7 @@ function FormPanel() {
       {!submitted ? (
         <form
           className="space-y-6 sm:space-y-8"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSubmitted(true);
-          }}
+          onSubmit={handleSubmit}
         >
           <FormField
             id="name"
@@ -514,12 +533,13 @@ function FormPanel() {
           {/* Submit button */}
           <motion.button
             type="submit"
-            className="w-full py-4 sm:py-5 text-white bg-[#004445] hover:bg-[#003334] rounded-2xl font-bold text-base sm:text-lg shadow-[0_0_30px_rgba(0,68,69,0.15)] relative overflow-hidden"
+            disabled={isSubmitting}
+            className="w-full py-4 sm:py-5 text-white bg-[#004445] hover:bg-[#003334] disabled:opacity-70 disabled:cursor-not-allowed rounded-2xl font-bold text-base sm:text-lg shadow-[0_0_30px_rgba(0,68,69,0.15)] relative overflow-hidden"
             initial={{ opacity: 0, y: 16 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
-            whileHover={{ y: -3, boxShadow: "0 12px 40px rgba(0,68,69,0.28)" }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={!isSubmitting ? { y: -3, boxShadow: "0 12px 40px rgba(0,68,69,0.28)" } : {}}
+            whileTap={!isSubmitting ? { scale: 0.97 } : {}}
           >
             {/* Shimmer sweep */}
             <motion.span
@@ -532,7 +552,7 @@ function FormPanel() {
                   "linear-gradient(90deg, transparent, rgba(255,255,255,0.13), transparent)",
               }}
             />
-            Send Message
+            {isSubmitting ? "Sending..." : "Send Message"}
           </motion.button>
         </form>
       ) : (

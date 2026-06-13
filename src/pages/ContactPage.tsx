@@ -23,7 +23,7 @@ export function ContactPage() {
   return (
     <div
       ref={pageRef}
-      className="bg-[#f8fafa] min-h-screen relative overflow-x-hidden"
+      className="bg-[#f8fafa] min-h-screen relative "
     >
       {/* ── Parallax dot grid ── */}
       <motion.div

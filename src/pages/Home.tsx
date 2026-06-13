@@ -24,9 +24,8 @@ export function Home() {
       {/* PAGE CONTENT */}
       <Hero />
       <HomeServices />
-      <FeaturedProducts />
       <Machines />
-      <Customization/>
+      <FeaturedProducts />
       <About />
       <Contact />
 

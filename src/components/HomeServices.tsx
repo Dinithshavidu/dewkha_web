@@ -111,7 +111,7 @@ function SectionHeading() {
       </motion.div>
 
       <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-[#0a1a1a] mb-6 tracking-tight leading-[1.1] sm:leading-[1.05]">
-        {["Do", "you", "have", "a", "3D", "model?"].map((word, wi) => (
+        {["Do", "you", "have", "a", "3D", "model", "or", "laser", "engraving", "design?"].map((word, wi) => (
           <motion.span
             key={wi}
             className="inline-block mr-2 lg:mr-4"
@@ -256,13 +256,13 @@ export function HomeServices() {
             action={
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
                 <a 
-                  href="mailto:info@dewkha.lk" 
+                  href="mailto:dewkha.creation@gmail.com" 
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-4 sm:px-6 bg-teal-500 hover:bg-teal-400 text-[#004445] text-sm sm:text-base font-black rounded-xl transition-all"
                 >
                   <Mail className="w-4 h-4 sm:w-5 sm:h-5" /> Email Files
                 </a>
                 <a 
-                  href="https://wa.me/94779727375" 
+                  href="https://wa.me/94711332442" 
                   target="_blank" 
                   rel="noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-4 sm:px-6 bg-transparent border border-teal-500/30 hover:border-teal-400 text-teal-300 hover:text-white text-sm sm:text-base font-bold rounded-xl transition-all"

@@ -40,8 +40,8 @@ export function Navbar() {
   const links = [
     { to: "/",        label: "Home"     },
     { to: "/services",label: "Services" },
-    { to: "/products",label: "Products" },
     { to: "/machines",label: "Machines" },
+    { to: "/products",label: "Products" },
     { to: "/about",   label: "About Us" },
   ];
 

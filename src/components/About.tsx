@@ -7,15 +7,14 @@ import {
 } from "motion/react";
 import { useRef } from "react";
 
-const logos = [
-  "TechCorp Prototyping",
-  "AeroSpace Parts",
-  "Creative Studio",
-  "Local Architects",
-  "AutoMods Inc",
-  "EduBuild Hub",
-  "MakerSpace",
-  "Design Labs",
+// Replace these with your actual logo image paths
+const partnerLogos = [
+  "/images/logos/Dewkha-logo.png", // e.g., Replace with your actual paths
+  "/images/logos/Dewkha-logo.png",
+  "/images/logos/Dewkha-logo.png",
+  "/images/logos/Dewkha-logo.png",
+  "/images/logos/Dewkha-logo.png",
+  "/images/logos/Dewkha-logo.png",
 ];
 
 // ─── Stat counter block ───────────────────────────────────────────────────────
@@ -389,7 +388,7 @@ function PartnersMarquee() {
         />
       </div>
 
-      {/* Scrolling logo strip */}
+      {/* Scrolling logo strip (Image Version) */}
       <div className="relative flex overflow-hidden py-6 lg:py-8">
         {/* Edge fades */}
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 md:w-64 bg-gradient-to-r from-[#f5f9f9] to-transparent z-10 pointer-events-none" />
@@ -397,23 +396,22 @@ function PartnersMarquee() {
 
         {/* Main marquee — left */}
         <motion.div
-          className="flex whitespace-nowrap"
+          className="flex whitespace-nowrap items-center"
           animate={{ x: [0, -2000] }}
           transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
         >
-          {[...logos, ...logos, ...logos].map((logo, index) => (
+          {[...partnerLogos, ...partnerLogos, ...partnerLogos].map((logoSrc, index) => (
             <motion.div
               key={index}
-              className="px-6 sm:px-10 lg:px-16 flex items-center justify-center text-xl sm:text-2xl md:text-3xl font-heading font-black text-[#004445]/20 hover:text-[#004445]/55 transition-colors cursor-default select-none"
-              whileHover={{
-                scale: 1.05,
-                color: "rgba(0,68,69,0.6)",
-              }}
+              className="px-8 sm:px-12 lg:px-20 flex items-center justify-center shrink-0 cursor-default select-none"
+              whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              {/* Dot separator */}
-              <span className="mr-6 sm:mr-10 lg:mr-16 text-teal-400/30 text-xs sm:text-base">◆</span>
-              {logo}
+              <img 
+                src={logoSrc} 
+                alt="Partner Logo" 
+                className="h-10 sm:h-12 md:h-16 object-contain opacity-50 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
+              />
             </motion.div>
           ))}
         </motion.div>
@@ -425,19 +423,22 @@ function PartnersMarquee() {
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 md:w-64 bg-gradient-to-l from-[#f5f9f9] to-transparent z-10 pointer-events-none" />
 
         <motion.div
-          className="flex whitespace-nowrap"
+          className="flex whitespace-nowrap items-center"
           animate={{ x: [-2000, 0] }}
           transition={{ repeat: Infinity, ease: "linear", duration: 45 }}
         >
-          {[...logos, ...logos, ...logos].map((logo, index) => (
+          {[...partnerLogos, ...partnerLogos, ...partnerLogos].reverse().map((logoSrc, index) => (
             <motion.div
               key={index}
-              className="px-6 sm:px-10 lg:px-16 flex items-center justify-center text-lg sm:text-xl md:text-2xl font-heading font-black text-[#004445]/10 hover:text-[#004445]/35 transition-colors cursor-default select-none"
-              whileHover={{ scale: 1.05 }}
+              className="px-8 sm:px-12 lg:px-20 flex items-center justify-center shrink-0 cursor-default select-none"
+              whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             >
-              <span className="mr-6 sm:mr-10 lg:mr-16 text-teal-400/20 text-xs sm:text-sm">◆</span>
-              {logo}
+              <img 
+                src={logoSrc} 
+                alt="Partner Logo" 
+                className="h-8 sm:h-10 md:h-12 object-contain opacity-30 hover:opacity-80 transition-opacity duration-300 filter grayscale"
+              />
             </motion.div>
           ))}
         </motion.div>

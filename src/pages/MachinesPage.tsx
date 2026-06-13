@@ -368,7 +368,8 @@ export function MachinesPage() {
             >
               <Search className="w-10 h-10 sm:w-12 sm:h-12 mb-4 opacity-20" />
               <p className="text-base sm:text-lg font-medium">No machines found.</p>
-              <p className="text-xs sm:text-sm opacity-70">Try adjusting your search or category filter.</p>
+              <p className="text-xs sm:text-sm opacity-70">This category is being updated with new items.
+              Stay tuned for upcoming items.</p>
             </motion.div>
           )}
         </motion.div>
